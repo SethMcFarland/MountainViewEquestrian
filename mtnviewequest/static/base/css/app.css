@@ -1,0 +1,37 @@
+.row.full-width {
+	width: 100%;
+	max-width: 100%;
+}
+
+.errorlist {
+	color: red;
+}
+
+.error {
+	border: solid thin red;
+}
+
+.field_error {
+	color: red;
+}
+
+.non_field_error {
+	color: red;
+
+	/* Vertically align error messages in red box */
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.non_field_error_list {
+	background-color: #ffcccc;
+	border: solid thin red;
+	margin-bottom: 1em;
+	padding: 0.5em;
+	
+	/* Set rounded corners */
+	-webkit-border-radius: 0.3em 0.3em 0.3em 0.3em;
+	-moz-border-radius: 0.3em 0.3em 0.3em 0.3em;
+	-o-border-radius: 0.3em 0.3em 0.3em 0.3em;
+	border-radius: 0.3em 0.3em 0.3em 0.3em;
+}

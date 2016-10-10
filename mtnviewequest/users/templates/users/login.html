@@ -1,0 +1,40 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+	<div class="row fullwidth">
+		<div class="small-12 large-12 columns">
+			<div class="row fullwidth">
+				<div class="small-10 small-centered large-10 large-centered columns">
+					<form action="{% url "users:login" %}" method="post">
+						{% csrf_token %}
+						<div class="field_wrapper">
+							{{ form.username.errors }}
+							{{ form.username.label_tag }}
+							{{ form.username }}
+						</div>
+						<div class="field_wrapper">
+							{{ form.password.errors }}
+							{{ form.password.label_tag }}
+							{{ form.password }}
+						</div>
+						<div class="form_errors">
+							{{ form.non_field_errors }}
+						</div>
+						<input type="submit" value="Submit" />
+					</form>
+				</div>
+			</div>
+			<div class="row fullwidth">
+				<div id="users" class="small-10 small-centered large-10 large-centered columns">
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+{% block scripts %}
+	<script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+	<script type="text/babel" src="{% static "base/js/app.js" %}"></script>
+{% endblock scripts %}
