@@ -1,38 +1,51 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 
 class UserLoginForm(forms.Form):
-	username = forms.CharField(
-		max_length=50
+	email = forms.EmailField(
+		label='Email Address', 
+		error_messages={
+			'required': 'Please enter your email address', 
+			'invalid': 'The email address entered appears to be invalid'
+		}
 	)
 
 	password = forms.CharField(
-		widget=forms.PasswordInput
+		label='Password', 
+		widget=forms.PasswordInput,
 	)
 
 	def clean(self):
-		username = self.cleaned_data["username"]
-		password = self.cleaned_data["password"]
-		user = authenticate(username=username, password=password)
+		user = User.objects.filter(email=self.cleaned_data.get("email"))
 
-		if username and password:
-			if not user:
-				raise forms.ValidationError("Username not found")
+		if user.exists() and len(user) == 1:
+			username = user[0].username
+			password = self.cleaned_data["password"]
+			user = authenticate(username=username, password=password)
 
-			if not user.check_password(password):
-				raise forms.ValidationError("Incorrect Password")
+			if username and password:
+				if not user:
+					raise forms.ValidationError("Username not found")
 
-			if not user.is_active:
-				raise forms.ValidationError("This user is no longer active")
+				if not user.check_password(password):
+					raise forms.ValidationError("Incorrect Password")
 
-		return super(UserLoginForm, self).clean()
+				if not user.is_active:
+					raise forms.ValidationError("This user is no longer active")
 
+			return super(UserLoginForm, self).clean()
+
+		else:
+			raise forms.ValidationError("User not found")
 
 
 class UserRegistrationForm(forms.ModelForm):
 
 	reason_choices = (
+		('', '--- Select One --- '),
 		(1, 'I would like to register my horse for training'),
 		(2, 'I would list to register for an event'),
 		(3, 'Other'),
@@ -89,7 +102,33 @@ class UserRegistrationForm(forms.ModelForm):
 			'required': 'Please choose a reason for registration', 
 			'invalid_choice': 'Invalid choice selected'
 		},
-		choices=reason_choices,
+		choices=reason_choices
+	)
+
+	horse_name = forms.CharField(
+		label="Horse Name",
+		max_length=100,
+		required=False
+	)
+
+	horse_age = forms.IntegerField(
+		validators=[
+			MaxValueValidator(50), 
+			MinValueValidator(1)
+		],
+		required=False
+	)
+
+	horse_breed = forms.CharField(
+		label="Horse Breed",
+		max_length=250,
+		required=False
+	)
+
+	horse_description = forms.CharField(
+		label="A brief description of your horse",
+		widget=forms.Textarea,
+		required=False
 	)
 
 	class Meta:
@@ -102,7 +141,11 @@ class UserRegistrationForm(forms.ModelForm):
 			'password',
 			'password2',
 			'phone_num',
-			'reason'
+			'reason',
+			'horse_name',
+			'horse_age',
+			'horse_breed',
+			'horse_description'
 		]
 
 

@@ -1,0 +1,25 @@
+{% load custom_filters %}
+
+<form action="{% url "users:login" %}" method="post" id="login_form">
+	{% csrf_token %}
+	{% for field in form %}
+		<div class="field_wrapper">
+			{% if field.errors %}
+				{{ field.label_tag }} {{ field|addattrs:"class,error" }}
+				{% for err in field.errors %}
+					<p class="field_error">{{ err }}</p>
+				{% endfor %}
+			{% else %}
+				{{ field.label_tag }} {{ field }}
+			{% endif %}
+		</div>							
+	{% endfor %}
+	{% if form.non_field_errors %}
+		<div class="non_field_error_list">
+			{% for err in form.non_field_errors %}
+				<p class="non_field_error">{{ err }}</p>
+			{% endfor %}
+		</div>							
+	{% endif %}
+	<button type="submit" form="login_form" value="Submit" class="button">Submit</button>				
+</form>

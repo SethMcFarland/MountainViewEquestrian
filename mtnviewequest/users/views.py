@@ -6,34 +6,40 @@ from django.urls import reverse
 from django.template.loader import render_to_string
 
 from .forms import UserRegistrationForm, UserLoginForm
-from .models import Profile
+from .models import Profile, Horse
 from django.contrib.auth.models import User
 
 # Create your views here.
 
-def login_view(request):
+def user_login(request):
 
 	if request.method == 'POST':
 		form = UserLoginForm(request.POST)
 
 		if form.is_valid():
-			user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
-			login(request, user)
+			user = User.objects.filter(email=form.cleaned_data.get("email"))
 
-			return HttpResponseRedirect("/")
+			if user.exists() and len(user) == 1:
+				user = authenticate(username=user[0].username, password=form.cleaned_data['password'])
+				login(request, user)
+				return HttpResponse("Success", status=202)
+
+			else:
+				return HttpResponse("Failure", status=500)
 
 	else:
 		form = UserLoginForm()
 
-	return render(request, 'users/login.html', {'form': form})
+	html = render_to_string('users/partials/user_login_form.html', {'form': form}, request=request)
+	return HttpResponse(html, status=201)
 
 
-def logout_view(request):
-	logout()
-	return HttpResponseRedirect(reverse('base:index'))
+def user_logout(request):
+	logout(request)
+	return HttpResponseRedirect('/')
 
 
-def registration(request):
+def user_registration(request):
 
 	if request.method == 'POST':
 		form = UserRegistrationForm(request.POST)
@@ -44,8 +50,25 @@ def registration(request):
 			user.set_password(password)
 			user.save()
 
-			profile = Profile(user=user, phone_num=form.cleaned_data.get('phone_num'), reason=form.cleaned_data.get('reason'))
+			profile = Profile(
+							user=user,
+							phone_num=form.cleaned_data.get('phone_num'),
+							reason=form.cleaned_data.get('reason')
+						)
 			profile.save()
+			print("horse name: " + form.cleaned_data.get('horse_name') + form.cleaned_data.get('reason'))
+			if(form.cleaned_data.get('reason') == '1'):
+				print("horse name: " + form.cleaned_data.get('horse_name'))
+				horse = Horse(
+							owner=user, 
+							name=form.cleaned_data.get('horse_name'),
+							age=form.cleaned_data.get('horse_age'),
+							breed=form.cleaned_data.get('horse_breed'),
+							description=form.cleaned_data.get('horse_description')
+						)
+				horse.save()
+			else:
+				print("no horse found in post")
 
 			user = authenticate(username=user.username, password=password)
 			login(request, user)
