@@ -2,20 +2,6 @@ $(document).ready(function() {
 	$(document).on("change", '#id_reason', function() {
 		console.log($('#id_reason').val());
 		extend_form($('#id_reason').val());
-		/*if($('#id_reason').val() == 1) {
-			$('.hidden_field_wrapper').show();
-			$('#id_horse_name').prop('required', true);
-			$('#id_horse_age').prop('required', true);
-			$('#id_horse_breed').prop('required', true);
-			$('#id_horse_description').prop('required', true);
-		}
-		else {
-			$('.hidden_field_wrapper').hide();
-			$('#id_horse_name').prop('required', false);
-			$('#id_horse_age').prop('required', false);
-			$('#id_horse_breed').prop('required', false);
-			$('#id_horse_description').prop('required', false);
-		}*/
 	});
 });
 
@@ -37,7 +23,7 @@ function extend_form(value) {
 }
 
 function profile_or_home() {
-	$('#login_or_reg_modal_contents').html("<h5><a href='/user/profile'>Profile</a> OR <a href='/'>Home</a>")
+	$('#login_or_reg_modal_contents').html("<h5><a href='/'>Profile</a> OR <a href='/'>Home</a>")
 }
 
 $(document).on('submit', '#registration_form', function(e) {
@@ -63,7 +49,8 @@ $(document).on('submit', '#registration_form', function(e) {
 		},
 		success: function(response, status_text, xhr){
 			if(xhr.status == 202) {
-				profile_or_home();
+				window.location.replace('/user/' + response.uid);
+				//profile_or_home();
 			}
 			else if(xhr.status == 201) {
 				console.log("no such luck");
@@ -102,8 +89,7 @@ $(document).on('submit', '#login_form', function(e) {
 		},
 		success: function(response, status_text, xhr){
 			if(xhr.status == 202) {
-				profile_or_home();
-				//$('#login_or_reg_modal').foundation('close');
+				window.location.replace('/user/' + response.uid);
 			}
 			else if(xhr.status == 201) {
 				console.log("no such luck");
@@ -127,3 +113,46 @@ $('#modal_login_link').click(function() {
 		}
 	});
 });
+
+
+$(document).on('submit', '#horse_registration_form', function(e) {
+	e.preventDefault();
+	var myurl = '/user/horse_registration/?uid=' + uid;
+
+	$.ajax({
+		type: 'POST',
+		url: myurl,
+		dataType: 'json',
+		data:{
+			name: $('#id_name').val(),
+			age: $('#id_age').val(),
+			breed: $('#id_breed').val(),
+			description: $('#id_description').val(),
+			csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+		},
+		success: function(response, status_text, xhr){
+			if(xhr.status == 202) {
+				update_horse_list($.parseJSON(response));
+				$('#horse_registration_form')[0].reset();
+				$('#register_horse_modal').foundation('close');
+				console.log("success");
+			}
+			else if(xhr.status == 201) {
+				console.log("no such luck");
+				$('#register_horse_modal_contents').html(response);
+			}
+		},
+		error: function(response){
+			console.log("Returned error code");
+		}
+	});
+});
+
+
+function update_horse_list(response) {
+
+	$('#no_horses').hide();
+
+	$("<li>" + response[0]["fields"]["name"] + "</li>").appendTo("#horse_list");
+
+}

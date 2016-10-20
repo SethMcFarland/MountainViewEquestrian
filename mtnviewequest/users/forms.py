@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+from .models import Horse
+
 
 class UserLoginForm(forms.Form):
 	email = forms.EmailField(
@@ -41,6 +43,38 @@ class UserLoginForm(forms.Form):
 		else:
 			raise forms.ValidationError("User not found")
 
+
+class HorseRegistrationForm(forms.ModelForm):
+	name = forms.CharField(
+		label="Horse Name",
+		max_length=100
+	)
+
+	age = forms.IntegerField(
+		validators=[
+			MaxValueValidator(50), 
+			MinValueValidator(1)
+		]
+	)
+
+	breed = forms.CharField(
+		label="Horse Breed",
+		max_length=250
+	)
+
+	description = forms.CharField(
+		label="A brief description of your horse",
+		widget=forms.Textarea
+	)
+
+	class Meta:
+		model = Horse
+		fields = [
+			'name',
+			'age',
+			'breed',
+			'description'
+		]
 
 class UserRegistrationForm(forms.ModelForm):
 
@@ -105,6 +139,12 @@ class UserRegistrationForm(forms.ModelForm):
 		choices=reason_choices
 	)
 
+	email_prefs = forms.BooleanField(
+		label="Would you like to be kept up to date? (shows, events, etc.)",
+		initial=True,
+		required=False
+	)
+
 	horse_name = forms.CharField(
 		label="Horse Name",
 		max_length=100,
@@ -142,6 +182,7 @@ class UserRegistrationForm(forms.ModelForm):
 			'password2',
 			'phone_num',
 			'reason',
+			'email_prefs',
 			'horse_name',
 			'horse_age',
 			'horse_breed',

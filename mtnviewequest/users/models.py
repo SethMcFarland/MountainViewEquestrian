@@ -20,13 +20,15 @@ class Profile(models.Model):
 
 	reason = models.IntegerField(choices=reason_choices, default=OTHER)
 
+	email_prefs = models.BooleanField(default=True)
+
 	def __str__(self):
 		return self.user.first_name + " " + self.user.last_name
 
 
 class Horse(models.Model):
 
-	owner = models.OneToOneField(User, on_delete=models.CASCADE)
+	owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
 	name = models.CharField(max_length=100)
 

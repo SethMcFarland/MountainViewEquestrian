@@ -1,18 +1,41 @@
+body {
+	background-color: #372929;
+}
+
+.main {
+	background-color: white;
+	margin-top: 1.5em;
+	box-shadow: 0.75em 0.75em #0f0b0b;
+}
+
 .row.full-width {
 	width: 100%;
 	max-width: 100%;
 }
 
-.errorlist {
-	color: red;
-}
-
-.error {
+.input_error {
 	border: solid thin red;
 }
 
 .field_error {
 	color: red;
+
+	/* Vertically align error messages in red box */
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.field_error_list {
+	background-color: #ffcccc;
+	border: solid thin red;
+	margin-bottom: 1em;
+	padding: 0.5em;
+
+	/* Set rounded corners */
+	-webkit-border-radius: 0.3em 0.3em 0.3em 0.3em;
+	-moz-border-radius: 0.3em 0.3em 0.3em 0.3em;
+	-o-border-radius: 0.3em 0.3em 0.3em 0.3em;
+	border-radius: 0.3em 0.3em 0.3em 0.3em;
 }
 
 .non_field_error {

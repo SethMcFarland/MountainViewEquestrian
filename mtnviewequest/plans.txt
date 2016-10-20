@@ -1,0 +1,17 @@
+Apps:
+	User
+	Payment
+	Blog
+	Events
+	Messaging
+
+Templates:
+	Base
+	Index
+	Profile
+
+Partials:
+	Blog
+	User Login Form
+	User Registration Form
+

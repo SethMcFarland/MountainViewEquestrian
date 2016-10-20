@@ -3,12 +3,12 @@
 <form action="{% url "users:registration" %}" method="post" id="registration_form">
 	{% csrf_token %}
 	{% for field in form %}
-		{% if forloop.counter0 < 8 %}
+		{% if forloop.counter0 < 9 %}
 			<div class="field_wrapper">
 				{% if field.errors %}
-					{{ field.label_tag }} {{ field|addattrs:"class,error" }}
+					{{ field.label_tag }} {{ field|addattrs:"class,input_error" }}
 					{% for err in field.errors %}
-						<p class="field_error">{{ err }}</p>
+						<div class="field_error_list"><p class="field_error">{{ err }}</p></div>
 					{% endfor %}
 				{% else %}
 					{{ field.label_tag }} {{ field }}
@@ -17,9 +17,9 @@
 		{% else %}
 			<div class="hidden_field_wrapper" id="hidden_field_wrapper" hidden>
 				{% if field.errors %}
-					{{ field.label_tag }} {{ field|addattrs:"class,error" }}
+					{{ field.label_tag }} {{ field|addattrs:"class,input_error" }}
 					{% for err in field.errors %}
-						<p class="field_error">{{ err }}</p>
+						<div class="field_error_list"><p class="field_error">{{ err }}</p></div>
 					{% endfor %}
 				{% else %}
 					{{ field.label_tag }} {{ field }}

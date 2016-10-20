@@ -1,39 +1,56 @@
 {% extends "base/base.html" %}
 {% load static %}
-{% load crispy_forms_tags %}
 
 {% block content %}
 	<div class="row fullwidth">
 		<div class="small-12 large-12 columns">
-			<div class="row fullwidth">
-				<div class="small-10 small-centered large-10 large-centered columns">
-					<form action="{% url "users:registration" %}" method="post">
-						{% csrf_token %}
-						<!--{% for field in form %}
-							<div class="field_wrapper">
-								{{ field.errors }}
-								{{ field.label_tag }} {{ field }}
-							</div>							
-						{% endfor %}
-						<div class="form_errors">
-							{{ form.non_field_errors }}
-						</div>
-						<input type="submit" value="Submit" />-->
-						{{ form|crispy }}
-						<input type="submit" value="Submit" />
-					</form>
-				</div>
-			</div>
-			<div class="row fullwidth">
-				<div id="users" class="small-10 small-centered large-10 large-centered columns">
-				</div>
-			</div>
+			<h3> Welcome {{ user.first_name }}! </h3>
 		</div>
 	</div>
+	<div class="row fullwidth">
+		<div class="accordion" data-accordion data-allow-all-closed="true" data-multi-expand="true">
+			<li class="accordion-item" data-accordion-item>
+				<a href="#" class="accordion-title">My Horses</a>
+				<div class="accordion-content" data-tab-content>
+					<ul>
+						<div id="horse_list">
+							{% for horse in users_horses %}
+								<li>{{horse.name}}</li>
+							{% endfor %}
+						</div>
+					</ul>
+					{% if not users_horses.all %}
+						<h5 id="no_horses">No horses registered</h5>
+					{% endif %}
+					<div style="margin-top: 1em;">
+						<a class="button" data-open="register_horse_modal" id="horse_registration">Register a horse</a>
+					</div>
+				</div>
+			</li>
+			<li class="accordion-item" data-accordion-item>
+				<a href="#" class="accordion-title">Billing</a>
+				<div class="accordion-content" data-tab-content>
+					{{ user.last_name }}
+				</div>
+			</li>
+		</div>
+	</div>
+	<div class="reveal" id="register_horse_modal" data-reveal>
+		<div id="register_horse_modal_contents">
+			{% include "users/partials/horse_registration_form.html" %}
+		</div>
+	</div>
+	<button id="mybutton">button</button>
 {% endblock %}
 {% block scripts %}
 	<script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
     <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-	<script type="text/babel" src="{% static "base/js/app.js" %}"></script>
+	<!--<script type="text/babel" src="{% static "users/js/profile.js" %}"></script>-->
+	<script type="text/javascript" src="{% static "users/js/modalforms.js" %}"></script>
+
+	<script>
+		var url = "/user/api/users_horses/?uid={{ user.id|escapejs|safe }}";
+		var uid = "{{ user.id|escapejs|safe }}";
+	</script>
 {% endblock scripts %}

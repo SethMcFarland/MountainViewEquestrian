@@ -3,13 +3,13 @@
 <html>
 	<head>
 		<title>Mountain View Equestrian</title>
-		<link rel="stylesheet" type="text/css" href="{% static "base/css/foundation.css" %}" />
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.css" />
 		<link rel="stylesheet" type="text/css" href="{% static "base/css/app.css" %}" />
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" />
 	</head>
 	<body>
-		<div class="row fullwidth">
-			<div class="small-12, large-12 columns">
+		<div class="row">
+			<div class="small-10 small-centered large-10 large-centered columns main">
 				{% block content %}
 				{% endblock content %}
 			</div>
@@ -17,7 +17,12 @@
 
 
 		<script type="text/javascript" src="{% static "base/js/vendor/jquery.js" %}"></script>
-		<script type="text/javascript" src="{% static "base/js/vendor/foundation.js" %}"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.js"></script>
+		<script>
+			$(document).ready(function() {
+				$(document).foundation();
+			})
+		</script>
 		{% block scripts %}
 		{% endblock scripts %}
 	</body>
