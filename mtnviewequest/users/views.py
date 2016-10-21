@@ -77,6 +77,7 @@ def user_registration(request):
 							description=form.cleaned_data.get('horse_description')
 						)
 				horse.save()
+
 			else:
 				print("no horse found in post")
 
@@ -91,7 +92,9 @@ def user_registration(request):
 			return HttpResponse(html, status=201)
 
 	else:
-		return HttpResponse(status=500)
+		form = UserRegistrationForm()
+		html = render_to_string('users/partials/user_registration_form.html', {'form': form}, request=request)
+		return HttpResponse(html)
 
 
 def horse_registration(request):
@@ -104,7 +107,6 @@ def horse_registration(request):
 			horse.save()
 
 			new_horse_serialized = serializers.serialize('json', [horse])
-			#users_horses_serialized = serializers.serialize('json', users_horses)
 
 			return JsonResponse(new_horse_serialized, safe=False, status=202)
 
@@ -114,23 +116,3 @@ def horse_registration(request):
 
 	else:
 		return HttpResponse(status=500)
-		
-
-
-'''
-def usersapi(request):
-
-	users = User.objects.all()
-	users_serialized = serializers.serialize('json', users)
-
-	return JsonResponse(users_serialized, safe=False)
-
-
-def users_horses(request):
-	uid = request.GET.get('uid')
-	user = get_object_or_404(User, pk=uid)
-	horses = Horse.objects.filter(owner=user)
-	horses_serialized = serializers.serialize('json', horses)
-	
-	return JsonResponse(horses_serialized, safe=False)
-	'''
