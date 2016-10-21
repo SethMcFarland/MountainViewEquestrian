@@ -86,7 +86,7 @@ function register_form_submit(e) {
 
 		error: function(response){
 
-			console.log("Returned error code");
+			console.log("Error code from register_form_submit ajax call");
 
 		}
 
@@ -100,12 +100,18 @@ function register_handler() {
 
 		type: 'GET',
 		url: '/user/registration',
+
 		success: function(response) {
 
 			$('#login_or_reg_modal_contents').html(response);
 			$('#login_or_reg_modal').foundation('close');
 			$('#login_or_reg_modal').foundation('open');
 
+		}
+
+		error: function(response) {
+
+			console.log("Error code from register_handler ajax call");
 		}
 
 	});
@@ -147,7 +153,7 @@ function login_form_submit(e) {
 
 		error: function(response){
 
-			console.log("Returned error code");
+			console.log("Error code from login_form_submit ajax call");
 
 		}
 
@@ -160,12 +166,18 @@ function login_handler() {
 	$.ajax({
 		type: 'GET',
 		url: '/user/login',
+		
 		success: function(response) {
 
 			$('#login_or_reg_modal_contents').html(response);
 			$('#login_or_reg_modal').foundation('close');
 			$('#login_or_reg_modal').foundation('open');
 
+		}
+
+		error: function(response) {
+
+			console.log("Error code from login_handler ajax call");
 		}
 
 	});

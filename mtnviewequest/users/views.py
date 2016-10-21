@@ -74,7 +74,8 @@ def user_registration(request):
 							name=form.cleaned_data.get('horse_name'),
 							age=form.cleaned_data.get('horse_age'),
 							breed=form.cleaned_data.get('horse_breed'),
-							description=form.cleaned_data.get('horse_description')
+							description=form.cleaned_data.get('horse_description'),
+							status=3
 						)
 				horse.save()
 
@@ -116,3 +117,12 @@ def horse_registration(request):
 
 	else:
 		return HttpResponse(status=500)
+
+
+def horse_details(request):
+	horse = get_object_or_404(Horse, pk=request.GET.get('hid'))
+	enrollment_date = horse.created_at.strftime("%B %d, %Y")
+
+	html = render_to_string('users/partials/horse_details.html', {'enrollment_date': enrollment_date, 'horse': horse}, request=request)
+	return HttpResponse(html, status=202)
+	

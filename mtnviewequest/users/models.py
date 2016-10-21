@@ -28,6 +28,17 @@ class Profile(models.Model):
 
 class Horse(models.Model):
 
+	UNENROLLED = 1
+	ENROLLED = 2
+	PENDING = 3
+	COMPLETED = 4
+	status_choices = (
+		(UNENROLLED, 'Un-Enrolled'),
+		(ENROLLED, 'Enrolled'),
+		(PENDING, 'Pending'),
+		(COMPLETED, 'Completed'),
+	)
+
 	owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
 	name = models.CharField(max_length=100)
@@ -37,6 +48,10 @@ class Horse(models.Model):
 	breed = models.CharField(max_length=250)
 
 	description = models.TextField()
+
+	created_at = models.DateTimeField(auto_now_add=True)
+
+	status = models.IntegerField(choices=status_choices, default=UNENROLLED)
 
 	def __str__(self):
 		return self.name + " (" + self.owner.first_name + " " + self.owner.last_name + ")"

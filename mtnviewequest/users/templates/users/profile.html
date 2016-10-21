@@ -12,13 +12,15 @@
 			<li class="accordion-item" data-accordion-item>
 				<a href="#" class="accordion-title">My Horses</a>
 				<div class="accordion-content" data-tab-content>
-					<ul>
-						<div id="horse_list">
-							{% for horse in users_horses %}
-								<li>{{horse.name}}</li>
-							{% endfor %}
-						</div>
-					</ul>
+					<table class="hover" id="horse_details_table">
+						<tbody>
+							<div id="horse_list">
+								{% for horse in users_horses %}
+									<tr class="horse_details_table_item" id="{{ horse.id }}"><td>{{horse.name}}</td></tr>
+								{% endfor %}
+							</div>
+						</tbody>
+					</table>
 					{% if not users_horses.all %}
 						<h5 id="no_horses">No horses registered</h5>
 					{% endif %}
@@ -40,7 +42,10 @@
 			{% include "users/partials/horse_registration_form.html" %}
 		</div>
 	</div>
-	<button id="mybutton">button</button>
+	<div class="reveal" id="horse_details_modal" data-reveal>
+		<div id="horse_details_modal_contents">
+		</div>
+	</div>
 {% endblock %}
 {% block scripts %}
 	<script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
@@ -49,7 +54,6 @@
 	<script type="text/babel" src="{% static "users/js/profile.js" %}"></script>
 
 	<script>
-		var url = "/user/api/users_horses/?uid={{ user.id|escapejs|safe }}";
 		var uid = "{{ user.id|escapejs|safe }}";
 	</script>
 {% endblock scripts %}
