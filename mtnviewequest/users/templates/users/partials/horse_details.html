@@ -6,9 +6,11 @@
 		<li class="accordion-item" data-accordion-item>
 			<a href="#" class="accordion-title">Details</a>
 			<div class="accordion-content" data-tab-content>
-				<b>Enrolled On:</b> <p>{{ enrollment_date }}</p>
-				<b>Enrollment Status:</b> <p style="color: green;">{{ horse.status }}</p>
-				<button class="button" id="re_enroll_horse_button">Re-Enroll</button>
+				<p><b>Enrolled On:</b>  {{ enrollment_date }}</p>
+				<p id="enrollment_status"><b>Enrollment Status:</b>  {{ horse.get_status_display }}</p>
+				{% if horse.status in show_button_list %}
+					<button class="button" id="re_enroll_horse_button">Re-Enroll</button>
+				{% endif %}
 			</div>
 		</li>
 		<li class="accordion-item" data-accordion-item>

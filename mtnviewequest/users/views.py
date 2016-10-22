@@ -105,6 +105,7 @@ def horse_registration(request):
 			horse = form.save(commit=False)
 			print("This -->" + str(request.GET.get('uid')))
 			horse.owner = User.objects.filter(pk=request.GET.get('uid'))[0] #get_object_or_404(User, pk=request.POST.get('uid'))
+			horse.status = 3
 			horse.save()
 
 			new_horse_serialized = serializers.serialize('json', [horse])
@@ -123,6 +124,14 @@ def horse_details(request):
 	horse = get_object_or_404(Horse, pk=request.GET.get('hid'))
 	enrollment_date = horse.created_at.strftime("%B %d, %Y")
 
-	html = render_to_string('users/partials/horse_details.html', {'enrollment_date': enrollment_date, 'horse': horse}, request=request)
+	html = render_to_string('users/partials/horse_details.html', {'enrollment_date': enrollment_date, 'horse': horse, 'show_button_list': [1, 4]}, request=request)
 	return HttpResponse(html, status=202)
-	
+
+
+def re_enroll_horse(request):
+	horse = get_object_or_404(Horse, pk=request.GET.get('hid'))
+	horse.status = 3
+	horse.save()
+
+	html = "<b>Enrollment Status:</b>  Pending"
+	return HttpResponse(html)

@@ -13,12 +13,10 @@
 				<a href="#" class="accordion-title">My Horses</a>
 				<div class="accordion-content" data-tab-content>
 					<table class="hover" id="horse_details_table">
-						<tbody>
-							<div id="horse_list">
-								{% for horse in users_horses %}
-									<tr class="horse_details_table_item" id="{{ horse.id }}"><td>{{horse.name}}</td></tr>
-								{% endfor %}
-							</div>
+						<tbody id="horse_list">
+							{% for horse in users_horses %}
+								<tr class="horse_details_table_item" id="{{ horse.id }}"><td>{{ horse.name }}</td></tr>
+							{% endfor %}
 						</tbody>
 					</table>
 					{% if not users_horses.all %}
@@ -33,6 +31,18 @@
 				<a href="#" class="accordion-title">Billing</a>
 				<div class="accordion-content" data-tab-content>
 					{{ user.last_name }}
+				</div>
+			</li>
+			<li class="accordion-item" data-accordion-item>
+				<a href="#" class="accordion-title">My Events</a>
+				<div class="accordion-content" data-tab-content>
+					<table class="hover">
+						<tbody>
+							{% for event in users_events %}
+								<tr class="event_table_item" id="{{ event.id }}"><td>{{ event.name }}</td></tr>
+							{% endfor %}
+						</tbody>
+					</table>
 				</div>
 			</li>
 		</div>
