@@ -8,6 +8,7 @@ import json
 
 from .forms import UserRegistrationForm, UserLoginForm, HorseRegistrationForm
 from .models import Profile, Horse
+from events.models import Event
 from django.contrib.auth.models import User
 
 # Create your views here.
@@ -44,9 +45,11 @@ def user_logout(request):
 
 def user_profile(request, uid):
 	user = get_object_or_404(User, pk=uid)
-	users_horses = Horse.objects.filter(owner=user)
+	users_horses = user.horse_set.all()
+	users_events = user.event_set.all()
 	horse_form = HorseRegistrationForm()
-	return render(request, 'users/profile.html', {'user': user, 'horse_form': horse_form, 'users_horses': users_horses})
+
+	return render(request, 'users/profile.html', {'user': user, 'horse_form': horse_form, 'users_horses': users_horses, 'users_events': users_events})
 
 
 def user_registration(request):
@@ -104,7 +107,7 @@ def horse_registration(request):
 		if form.is_valid():
 			horse = form.save(commit=False)
 			print("This -->" + str(request.GET.get('uid')))
-			horse.owner = User.objects.filter(pk=request.GET.get('uid'))[0] #get_object_or_404(User, pk=request.POST.get('uid'))
+			horse.owner = get_object_or_404(User, pk=request.GET.get('uid'))
 			horse.status = 3
 			horse.save()
 

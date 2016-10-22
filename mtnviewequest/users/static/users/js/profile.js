@@ -4,7 +4,35 @@ $(document).ready(function() {
 
 	$('.horse_details_table_item').click(horse_details_handler);
 
+	$('.event_table_item').click(event_details_handler);
+
 });
+
+function event_details_handler() {
+
+	window.current_eid = $(this).attr('id');
+	var event_details_url = '/event/details/?eid=' + window.current_eid;
+
+	$.ajax({
+
+		type: 'GET',
+		url: event_details_url,
+
+		success: function(response, status_text, xhr) {
+
+			$('#event_details_modal').html(response).foundation('open');
+
+		},
+
+		error: function(response) {
+
+			console.log("Error at event_details_handler ajax call");
+
+		}
+
+	});
+
+}
 
 function re_enroll_horse_handler() {
 
@@ -97,7 +125,7 @@ function horse_registration(e) {
 			else if(xhr.status == 201) {
 
 				console.log("no such luck");
-				$('#register_horse_modal_contents').html(response);
+				$('#register_horse_modal').html(response);
 
 			}
 
