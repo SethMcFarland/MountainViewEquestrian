@@ -15,3 +15,7 @@ Partials:
 	User Login Form
 	User Registration Form
 
+address = Address(street="1052 E 9th Street", city="Chico", state="CA", zip_code="95928")
+
+event = Event(address=address, name="Horse Expo", start_date=datetime.datetime(year=2016, month=10, day=30, hour=8, minute=30), end_date=datetime.datetime(year=2016, month=10, day=30, hour=16, minute=30), backup_start_date=datetime.datetime(year=2016, month=11, day=30, hour=8, minute=30), backup_end_date=datetime.datetime(year=2016, month=11, day=30, hou
+r=16, minute=30), description="This is our horse expo being held at Wade Arena in Oroville CA", location="Wade Arena", capacity=25, cost=25, deposit=10, status=1)

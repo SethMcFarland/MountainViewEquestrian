@@ -6,22 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.css" />
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.js"></script>
-
-	<script>
-		$(document).ready(function() {
-			var calendar = $('#event_calendar').fullCalendar({
-
-				header:
-				{
-					left: 'title',
-					right: 'prev,next today'
-				}
-
-
-
-			})
-		});
-	</script>
+	<script type="text/javascript" src="{% static "events/js/events.js" %}"></script>
 {% endblock head %}
 
 {% block content %}

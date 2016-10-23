@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
 from django.http import HttpResponse, JsonResponse
 from django.core import serializers
+import dateutil.parser, datetime, json
 
 from .models import Event, Address
 from django.contrib.auth.models import User
@@ -30,13 +31,13 @@ def get_all(request):
 	start = dateutil.parser.parse(request.GET.get('start'))
 	end = dateutil.parser.parse(request.GET.get('end'))
 
-	events_in_period = Event.objects.filter(date__gte=start, date__lte=end)
+	events_in_period = Event.objects.filter(start_date__gte=start, start_date__lte=end)
 
 	events_list = []
 
 	for event in events_in_period:
 		events_list.append({'title': event.name, 'start': event.start_date.isoformat(), 'end': event.end_date.isoformat(), 'allDay': False})
 
-	events_list = serializers.serialize('json', events_list)
+	print(events_list)
 
 	return JsonResponse(events_list, safe=False, status=202)
