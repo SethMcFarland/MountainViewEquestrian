@@ -35,9 +35,13 @@ class Event(models.Model):
 
 	name = models.CharField(max_length=100)
 
-	date = models.DateTimeField()
+	start_date = models.DateTimeField()
 
-	backup_date = models.DateTimeField()
+	end_date = models.DateTimeField()
+
+	backup_start_date = models.DateTimeField()
+
+	backup_end_date = models.DateTimeField()
 
 	users = models.ManyToManyField(User)
 

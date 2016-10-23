@@ -6,6 +6,10 @@
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.css" />
 		<link rel="stylesheet" type="text/css" href="{% static "base/css/app.css" %}" />
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" />
+
+		<script type="text/javascript" src="{% static "base/js/vendor/jquery.js" %}"></script>
+		{% block head %}
+		{% endblock head %}
 	</head>
 	<body>
 		<div class="row">
@@ -16,7 +20,6 @@
 		</div>
 
 
-		<script type="text/javascript" src="{% static "base/js/vendor/jquery.js" %}"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.js"></script>
 		<script>
 			$(document).ready(function() {

@@ -2,6 +2,28 @@
 {% load static %}
 {% load custom_filters %}
 
+{% block head %}
+	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.css" />
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			var calendar = $('#event_calendar').fullCalendar({
+
+				header:
+				{
+					left: 'title',
+					right: 'prev,next today'
+				}
+
+
+
+			})
+		});
+	</script>
+{% endblock head %}
+
 {% block content %}
 	<div class="row fullwidth">
 		<div class="small-12 large-12 columns">
@@ -25,6 +47,12 @@
 						</div>
 						<p><a data-open="login_or_reg_modal" id="login_or_reg_modal_link">Login or Register</a></p>
 					{% endif %}
+				</div>
+			</div>
+			<div class="row">
+				<div class="small-8 small-centered large-8 large-centered columns">
+					<div id="event_calendar">
+					</div>
 				</div>
 			</div>
 		</div>

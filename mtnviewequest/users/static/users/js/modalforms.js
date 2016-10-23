@@ -107,7 +107,7 @@ function register_handler() {
 			$('#login_or_reg_modal').foundation('close');
 			$('#login_or_reg_modal').foundation('open');
 
-		}
+		},
 
 		error: function(response) {
 
@@ -166,14 +166,14 @@ function login_handler() {
 	$.ajax({
 		type: 'GET',
 		url: '/user/login',
-		
+
 		success: function(response) {
 
 			$('#login_or_reg_modal_contents').html(response);
 			$('#login_or_reg_modal').foundation('close');
 			$('#login_or_reg_modal').foundation('open');
 
-		}
+		},
 
 		error: function(response) {
 
