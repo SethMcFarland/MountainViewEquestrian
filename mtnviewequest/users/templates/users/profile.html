@@ -15,7 +15,7 @@
 					<table class="hover" id="horse_details_table">
 						<tbody id="horse_list">
 							{% for horse in users_horses %}
-								<tr class="horse_details_table_item" id="{{ horse.id }}"><td>{{ horse.name }}</td></tr>
+								<tr class="horse_details_table_item" id="horse_{{ horse.id }}"><td>{{ horse.name }}</td></tr>
 							{% endfor %}
 						</tbody>
 					</table>
@@ -39,7 +39,7 @@
 					<table class="hover">
 						<tbody>
 							{% for event in users_events %}
-								<tr class="event_table_item" id="{{ event.id }}"><td>{{ event.name }}</td></tr>
+								<tr class="event_table_item" id="event_{{ event.id }}"><td>{{ event.name }}</td></tr>
 							{% endfor %}
 						</tbody>
 					</table>

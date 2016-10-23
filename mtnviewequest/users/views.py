@@ -136,5 +136,4 @@ def re_enroll_horse(request):
 	horse.status = 3
 	horse.save()
 
-	html = "<b>Enrollment Status:</b>  Pending"
-	return HttpResponse(html)
+	return HttpResponse(status=200)

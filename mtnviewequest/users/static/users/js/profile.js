@@ -8,9 +8,36 @@ $(document).ready(function() {
 
 });
 
+function unenroll_event_handler() {
+
+	var unenroll_event_url = '/event/unenroll/?eid=' + window.current_eid + '&uid=' + uid;
+
+	$.ajax({
+
+		type: 'GET',
+		url: unenroll_event_url,
+
+		success: function(response) {
+
+			$('#' + window.current_event_row).remove();
+			$('#event_details_modal').foundation('close');
+
+		},
+
+		error: function(response) {
+
+			console.log("Error at unenroll_event_handler ajax call");
+
+		}
+
+	});
+
+}
+
 function event_details_handler() {
 
-	window.current_eid = $(this).attr('id');
+	window.current_event_row = $(this).attr('id');
+	window.current_eid = window.current_event_row.split('_')[1];
 	var event_details_url = '/event/details/?eid=' + window.current_eid;
 
 	$.ajax({
@@ -18,9 +45,10 @@ function event_details_handler() {
 		type: 'GET',
 		url: event_details_url,
 
-		success: function(response, status_text, xhr) {
+		success: function(response) {
 
 			$('#event_details_modal').html(response).foundation('open');
+			$('#unenroll_event').click(unenroll_event_handler);
 
 		},
 
@@ -43,9 +71,9 @@ function re_enroll_horse_handler() {
 		type: 'GET',
 		url: re_enroll_horse_url,
 		
-		success: function(response, status_text, xhr) {
+		success: function(response) {
 
-			$('#enrollment_status').html(response);
+			$('#enrollment_status').html("Pending");
 			$('#re_enroll_horse_button').hide();
 
 		},
@@ -62,7 +90,8 @@ function re_enroll_horse_handler() {
 
 function horse_details_handler(e) {
 	
-	window.current_hid = $(this).attr('id');
+	window.current_horse_row = $(this).attr('id');
+	window.current_hid = window.current_horse_row.split('_')[1];
 	var horse_details_url = '/user/horse_details/?hid=' + window.current_hid;
 
 	$.ajax({
@@ -70,7 +99,7 @@ function horse_details_handler(e) {
 		type: 'GET',
 		url: horse_details_url,
 
-		success: function(response, status_text, xhr) {
+		success: function(response) {
 
 			$('#horse_details_modal').html(response).foundation('open');
 			$('#horse_details_accordion').foundation();
