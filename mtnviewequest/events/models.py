@@ -17,6 +17,16 @@ class Address(models.Model):
 		return self.street + "\n" + self.city + ", " + self.state + " " + self.zip_code
 
 
+def get_default_address():
+	address = Address.objects.filter(street="Address Pending", city="Chico", state="CA", zip_code="95928")
+	
+	if address.exists():
+		return address[0]
+
+	address = Address(street="Address Pending", city="Chico", state="CA", zip_code="95928")
+	address.save()
+	return address 
+
 
 class Event(models.Model):
 
@@ -31,7 +41,7 @@ class Event(models.Model):
 		(EXPIRED, 'Expired'),
 	)
 
-	address = models.OneToOneField(Address)
+	address = models.ForeignKey(Address, on_delete=models.SET_DEFAULT, default=get_default_address)
 
 	name = models.CharField(max_length=100)
 

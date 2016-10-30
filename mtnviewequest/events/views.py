@@ -12,7 +12,7 @@ def event_details(request):
 	event = get_object_or_404(Event, pk=request.GET.get('eid'))
 	event_date = event.start_date.strftime("%B %d, %Y at %-I:%-M %p")
 	event_time = event.start_date.strftime("%-I:%-M %p to ") + event.end_date.strftime("%-I:%-M %p")
-	event_backup_date = event.backup_date.strftime("%B %d, %Y at %-I:%-M %p")
+	event_backup_date = event.backup_start_date.strftime("%B %d, %Y at %-I:%-M %p")
 
 	html = render_to_string('events/partials/event_details.html', {'event': event, 'event_date': event_date, 'event_time': event_time, 'event_backup_date': event_backup_date, 'address': event.address}, request=request)
 	return HttpResponse(html)
@@ -36,8 +36,14 @@ def get_all(request):
 	events_list = []
 
 	for event in events_in_period:
-		events_list.append({'title': event.name, 'start': event.start_date.isoformat(), 'end': event.end_date.isoformat(), 'allDay': False})
+		item = {'title': event.name, 'start': event.start_date.isoformat(), 'end': event.end_date.isoformat(), 'allDay': False, 'url': '/event/details/?eid=' + str(event.id)}
 
-	print(events_list)
+		if event.status == 2:
+			item['backgroundColor'] = 'red'
+
+		elif event.status != 1:
+			item['backgroundColor'] = 'grey'
+
+		events_list.append(item)
 
 	return JsonResponse(events_list, safe=False, status=202)
