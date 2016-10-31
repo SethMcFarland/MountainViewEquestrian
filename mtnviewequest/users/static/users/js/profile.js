@@ -38,7 +38,7 @@ function event_details_handler() {
 
 	window.current_event_row = $(this).attr('id');
 	window.current_eid = window.current_event_row.split('_')[1];
-	var event_details_url = '/event/details/?eid=' + window.current_eid;
+	var event_details_url = '/event/details/?enrolled=1&eid=' + window.current_eid;
 
 	$.ajax({
 
@@ -48,7 +48,7 @@ function event_details_handler() {
 		success: function(response) {
 
 			$('#event_details_modal').html(response).foundation('open');
-			$('#unenroll_event').click(unenroll_event_handler);
+			$('#event_details_button').click(unenroll_event_handler);
 
 		},
 

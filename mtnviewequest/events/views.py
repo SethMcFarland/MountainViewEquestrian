@@ -14,8 +14,21 @@ def event_details(request):
 	event_time = event.start_date.strftime("%-I:%-M %p to ") + event.end_date.strftime("%-I:%-M %p")
 	event_backup_date = event.backup_start_date.strftime("%B %d, %Y at %-I:%-M %p")
 
-	html = render_to_string('events/partials/event_details.html', {'event': event, 'event_date': event_date, 'event_time': event_time, 'event_backup_date': event_backup_date, 'address': event.address}, request=request)
+	enrolled = request.GET.get('enrolled')
+	if enrolled == '1':
+		button_text = "Unenroll"
+	else:
+		button_text = "Sign Up"
+
+	html = render_to_string('events/partials/event_details.html', {'event': event, 'event_date': event_date, 'event_time': event_time, 'event_backup_date': event_backup_date, 'address': event.address, 'button_text': button_text, 'enrolled': enrolled}, request=request)
 	return HttpResponse(html)
+
+
+def event_signup(request):
+	if request.method == 'GET':
+		event = get_object_or_404(Event, pk=request.GET.get('eid'))
+		html = render_to_string('events/partials/event_signup.html', {'event': event}, request=request)
+		return HttpResponse(html)
 
 
 def unenroll_event(request):
@@ -36,12 +49,15 @@ def get_all(request):
 	events_list = []
 
 	for event in events_in_period:
-		item = {'title': event.name, 'start': event.start_date.isoformat(), 'end': event.end_date.isoformat(), 'allDay': False, 'url': '/event/details/?eid=' + str(event.id)}
+		item = {'id': event.id, 'title': event.name, 'start': event.start_date.isoformat(), 'end': event.end_date.isoformat(), 'allDay': False, 'url': '/event/details/?enrolled=0&eid=' + str(event.id)}
 
-		if event.status == 2:
+		if event.status == 1:
+			item['backgroundColor'] = 'green'
+
+		elif event.status == 2:
 			item['backgroundColor'] = 'red'
 
-		elif event.status != 1:
+		else:
 			item['backgroundColor'] = 'grey'
 
 		events_list.append(item)

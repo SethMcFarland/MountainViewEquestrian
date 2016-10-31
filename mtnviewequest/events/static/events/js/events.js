@@ -12,24 +12,32 @@ $(document).ready(function() {
 
 		eventClick: function(event, js_event, view) {
 
-			$.ajax({
+			if(event.backgroundColor == "grey") {
+				$('#event_details_modal').html("<h3>Sorry, this event has expired</h3>").foundation('open');
+			}
 
-				type: 'GET',
-				url: event.url,
+			else {
+				$.ajax({
 
-				success: function(response) {
+					type: 'GET',
+					url: event.url,
 
-					$('#event_details_modal').html(response).foundation('open');
+					success: function(response) {
 
-				},
+						$('#event_details_modal').html(response).foundation('open');
+						$('#event_details_button').click({id: event.id}, signup_handler);
 
-				error: function(response) {
+					},
 
-					console.log("Error at event_details_handler ajax call");
+					error: function(response) {
 
-				}
+						console.log("Error at event_details_handler ajax call");
 
-			});
+					}
+
+				});
+
+			}
 
 			return false;
 		},
@@ -39,3 +47,27 @@ $(document).ready(function() {
 	});
 
 });
+
+function signup_handler(e) {
+
+	signup_handler_url = '/event/signup/?eid=' + e.data.id;
+
+	$.ajax({
+		type: 'GET',
+		url: signup_handler_url,
+
+		success: function(response) {
+
+			$('#event_details_modal').html(response)
+
+		},
+
+		error: function(response) {
+
+			console.log("Error at signup_handler ajax call");
+
+		}
+
+	});
+
+}
