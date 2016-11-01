@@ -15,12 +15,8 @@ def event_details(request):
 	event_backup_date = event.backup_start_date.strftime("%B %d, %Y at %-I:%-M %p")
 
 	enrolled = request.GET.get('enrolled')
-	if enrolled == '1':
-		button_text = "Unenroll"
-	else:
-		button_text = "Sign Up"
 
-	html = render_to_string('events/partials/event_details.html', {'event': event, 'event_date': event_date, 'event_time': event_time, 'event_backup_date': event_backup_date, 'address': event.address, 'button_text': button_text, 'enrolled': enrolled}, request=request)
+	html = render_to_string('events/partials/event_details.html', {'event': event, 'event_date': event_date, 'event_time': event_time, 'event_backup_date': event_backup_date, 'address': event.address, 'enrolled': enrolled}, request=request)
 	return HttpResponse(html)
 
 

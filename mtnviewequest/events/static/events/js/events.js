@@ -53,6 +53,7 @@ function signup_handler(e) {
 	signup_handler_url = '/event/signup/?eid=' + e.data.id;
 
 	$.ajax({
+
 		type: 'GET',
 		url: signup_handler_url,
 

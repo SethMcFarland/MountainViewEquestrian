@@ -1,20 +1,46 @@
 <div class="row">
 	<div class="small-12 large-12 columns underline_header">
-		<h3 class="text-center"> {{ event_name }} </h3>
+		<h3 class="text-center"> {{ event.name }} </h3>
 	</div>
 </div>
-<div class="row">
-	<div class="small-12 large-12 columns">
-		<h3 class="text-center">Paypal</h3>
+<div id="deposit_or_full_section">
+	<div class="row">
+		<div class="small-8 small-centered large-8 large-centered columns">
+			<h5 class="text-center">Would you like to pay in full now?</h5>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-2 small-centered large-2 large-centered columns">
+			<div class="switch absolute-center">
+				<input class="switch-input" id="deposit_or_full" type="checkbox" name="deposit_or_full">
+				<label class="switch-paddle" for="deposit_or_full">
+					<span class="show-for-sr">Pay full or deposit</span>
+					<span class="switch-active" aria-hidden="true">Yes</span>
+    				<span class="switch-inactive" aria-hidden="true">No</span>
+				</label>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="margin-top: 2em;">
+		<div class="small-4 small-centered large-4 large-centered columns">
+			<button class="button float-center" id="continue_signup_button">Continue</button>
+		</div>
 	</div>
 </div>
-<div class="row">
-	<div class="small-12 large-12 columns">
-		<h3 class="text-center">or</h3>
+<div id="payment_section" hidden>
+	<div class="row">
+		<div class="small-12 large-12 columns">
+			<h3 class="text-center">Paypal</h3>
+		</div>
 	</div>
-</div>
-<div class="row">
-	<div class="small-12 large-12 columns">
-		<h3 class="text-center">Cash by Square</h3>
+	<div class="row">
+		<div class="small-12 large-12 columns">
+			<h3 class="text-center">or</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 large-12 columns">
+			<h3 class="text-center">Cash by Square</h3>
+		</div>
 	</div>
 </div>
