@@ -13,12 +13,6 @@ body {
 	max-width: 100%;
 }
 
-.absolute-center {
-	margin: auto;
-	position: absolute;
-	top: 0; left: 0; bottom: 0; right: 0;
-}
-
 .input_error {
 	border: solid thin red;
 }
@@ -63,6 +57,11 @@ body {
 	-moz-border-radius: 0.3em 0.3em 0.3em 0.3em;
 	-o-border-radius: 0.3em 0.3em 0.3em 0.3em;
 	border-radius: 0.3em 0.3em 0.3em 0.3em;
+}
+
+.form_submit {
+	margin-top: 1.5em;
+	margin-bottom: 0em;
 }
 
 .underline_header {

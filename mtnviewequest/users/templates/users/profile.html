@@ -41,6 +41,9 @@
 							{% for event in users_events %}
 								<tr class="event_table_item" id="event_{{ event.id }}"><td>{{ event.name }}</td></tr>
 							{% endfor %}
+							{% for event in users_waitlist %}
+								<tr class="waitlist_table_item" id="event_{{ event.id }}"><td>{{ event.name }}</td></tr>
+							{% endfor %}
 						</tbody>
 					</table>
 				</div>

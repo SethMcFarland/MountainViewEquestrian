@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'dateutil',
     'events',
     'users',
+    'django_extensions',
     'crispy_forms',
     'crispy_forms_foundation',
     'django.contrib.admin',

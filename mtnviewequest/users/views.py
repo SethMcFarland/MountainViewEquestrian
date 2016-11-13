@@ -46,10 +46,11 @@ def user_logout(request):
 def user_profile(request, uid):
 	user = get_object_or_404(User, pk=uid)
 	users_horses = user.horse_set.all()
-	users_events = user.event_set.all()
+	users_events = user.enrolled_events.all()
+	users_waitlist = user.waitlisted_events.all()
 	horse_form = HorseRegistrationForm()
 
-	return render(request, 'users/profile.html', {'user': user, 'horse_form': horse_form, 'users_horses': users_horses, 'users_events': users_events})
+	return render(request, 'users/profile.html', {'user': user, 'horse_form': horse_form, 'users_horses': users_horses, 'users_events': users_events, 'users_waitlist': users_waitlist})
 
 
 def user_registration(request):

@@ -4,7 +4,9 @@ $(document).ready(function() {
 
 	$('.horse_details_table_item').click(horse_details_handler);
 
-	$('.event_table_item').click(event_details_handler);
+	$('.event_table_item').click({enrolled: 1}, event_details_handler);
+
+	$('.waitlist_table_item').click({enrolled: 2}, event_details_handler);
 
 });
 
@@ -34,11 +36,11 @@ function unenroll_event_handler() {
 
 }
 
-function event_details_handler() {
+function event_details_handler(e) {
 
 	window.current_event_row = $(this).attr('id');
 	window.current_eid = window.current_event_row.split('_')[1];
-	var event_details_url = '/event/details/?enrolled=1&eid=' + window.current_eid;
+	var event_details_url = '/event/details/?enrolled=' + e.data.enrolled + '&eid=' + window.current_eid;
 
 	$.ajax({
 

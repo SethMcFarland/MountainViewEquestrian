@@ -53,7 +53,9 @@ class Event(models.Model):
 
 	backup_end_date = models.DateTimeField()
 
-	users = models.ManyToManyField(User)
+	users = models.ManyToManyField(User, related_name="enrolled_events")
+
+	waitlist = models.ManyToManyField(User, related_name="waitlisted_events")
 
 	description = models.TextField()
 

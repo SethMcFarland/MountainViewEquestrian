@@ -53,23 +53,28 @@
 		<p>{{ event.description }}</p>
 	</div>
 </div>
-{% if enrolled != '1' and event.status == 2 %}
-	<button class="button" id="event_details_button">Join Waitlist</button>
-{% elif enrolled != '1' and event.status == 1 %}
+{% if enrolled == 2 %}
 	<div class="row">
-		<div class="small-8 large-8 columns">
-			<p><b>Would you like to pay in full now?</b></p>
-		</div>
-		<div class="small-4 large-4 columns">
-			<div class="switch">
-				<input class="switch-input" id="deposit_or_full" type="checkbox" name="deposit_or_full">
-				<label class="switch-paddle" for="deposit_or_full">
-					<span class="show-for-sr">Pay full or deposit</span>
-				</label>
-			</div>
+		<div class="small-12 large-12 columns">
+			<button class="button float-center form_submit" id="event_details_button">Drop Waitlist</button>
 		</div>
 	</div>
-	<button class="button" id="event_details_button">Sign Up</button>
+{% elif enrolled == 0 and event.status == 2 %}
+	<div class="row">
+		<div class="small-12 large-12 columns">
+			<button class="button float-center form_submit" id="event_details_button">Join Waitlist</button>
+		</div>
+	</div>
+{% elif enrolled == 0 and event.status == 1 %}
+	<div class="row">
+		<div class="small-12 large-12 columns">
+			<button class="button float-center form_submit" id="event_details_button">Sign Up</button>
+		</div>
+	</div>
 {% else %}
-	<button class="button" id="event_details_button">Unenroll</button>
+	<div class="row">
+		<div class="small-12 large-12 columns">
+			<button class="button float-center form_submit" id="event_details_button">Unenroll</button>
+		</div>
+	</div>
 {% endif %} 
