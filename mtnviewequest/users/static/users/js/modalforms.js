@@ -13,6 +13,8 @@ $(document).ready(function() {
 
 	$('#modal_login_link').click(login_handler);
 
+	$('.back_arrow').click(function() { $('#login_or_reg_modal').foundation('close'); });
+
 });
 
 function extend_form(value) {
@@ -106,6 +108,8 @@ function register_handler() {
 			$('#login_or_reg_modal_contents').html(response);
 			$('#login_or_reg_modal').foundation('close');
 			$('#login_or_reg_modal').foundation('open');
+			$('.back_arrow').unbind("click");
+			$('.back_arrow').click(reset_modal);
 
 		},
 
@@ -173,6 +177,8 @@ function login_handler() {
 			$('#login_or_reg_modal_contents').html(response);
 			$('#login_or_reg_modal').foundation('close');
 			$('#login_or_reg_modal').foundation('open');
+			$('.back_arrow').unbind("click");
+			$('.back_arrow').click(reset_modal);
 
 		},
 
@@ -188,8 +194,10 @@ function login_handler() {
 
 function reset_modal() {
 
-	$('#login_or_reg_modal_contents').html('<a id="modal_login_link">Login</a> or <a id="modal_register_link">Register</a>')
+	$('#login_or_reg_modal_contents').html('<p class="text-center"><a id="modal_login_link">Login</a> or <a id="modal_register_link">Register</a></p>')
 	$('#modal_register_link').click(register_handler);
 	$('#modal_login_link').click(login_handler);
+	$('.back_arrow').unbind("click");
+	$('.back_arrow').click(function() { $('#login_or_reg_modal').foundation('close'); });
 
 }

@@ -1,5 +1,9 @@
 {% load custom_filters %}
-
+<div class="row underline_header">
+	<div class="small-8 small-centered large-8 large-centered columns">
+		<h3 class="text-center"> Login </h5>
+	</div>
+</div>
 <form action="{% url "users:login" %}" method="post" id="login_form">
 	{% csrf_token %}
 	{% for field in form %}
@@ -21,5 +25,9 @@
 			{% endfor %}
 		</div>							
 	{% endif %}
-	<button type="submit" form="login_form" value="Submit" class="button">Submit</button>				
+	<div class="row">
+		<div class="small-12 large-12 columns">
+			<button type="submit" form="login_form" value="Submit" class="button float-center">Submit</button>
+		</div>
+	</div>			
 </form>
