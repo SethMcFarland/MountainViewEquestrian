@@ -70,7 +70,7 @@ function register_form_submit(e) {
 
 			if(xhr.status == 202) {
 
-				window.location.replace('/user/' + response.uid);
+				window.location.replace('/');
 
 			}
 
@@ -138,7 +138,7 @@ function login_form_submit(e) {
 
 			if(xhr.status == 202) {
 
-				window.location.replace('/user/' + response.uid);
+				window.location.replace('/');
 
 			}
 
@@ -161,6 +161,7 @@ function login_form_submit(e) {
 
 }
 
+
 function login_handler() {
 
 	$.ajax({
@@ -181,5 +182,14 @@ function login_handler() {
 		}
 
 	});
+
+}
+
+
+function reset_modal() {
+
+	$('#login_or_reg_modal_contents').html('<a id="modal_login_link">Login</a> or <a id="modal_register_link">Register</a>')
+	$('#modal_register_link').click(register_handler);
+	$('#modal_login_link').click(login_handler);
 
 }

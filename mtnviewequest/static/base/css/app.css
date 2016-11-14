@@ -68,3 +68,20 @@ body {
 	border-bottom: solid thin black;
 	margin-bottom: 1.5em;
 }
+
+.back_arrow {
+
+	color: #A9A9A9;
+	position: absolute;
+	/*right: 0.9em;
+	bottom: 0.25em;
+*/
+}
+
+.back_arrow:hover {
+
+	color: black;
+	cursor: pointer;
+	cursor: hand;
+
+} 

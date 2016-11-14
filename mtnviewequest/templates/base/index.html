@@ -24,11 +24,17 @@
 						<a href="{% url "users:logout" %}">Logout</a>
 					{% else %}
 						<div class="reveal" id="login_or_reg_modal" data-reveal>
+							<i class="fa fa-arrow-left fa-2 back_arrow" aria-hidden="true"></i>
 							<div id="login_or_reg_modal_contents">
-								<a id="modal_login_link">Login</a>
-								or
-								<a id="modal_register_link">Register</a>
+								<p class="text-center">
+									<a id="modal_login_link">Login</a>
+									or
+									<a id="modal_register_link">Register</a>
+								</p>
 							</div>
+							<button class="close-button" data-close aria-label="Close modal" type="button">
+								<span aria-hidden="true">&times;</span>
+							</button>
 						</div>
 						<p><a data-open="login_or_reg_modal" id="login_or_reg_modal_link">Login or Register</a></p>
 					{% endif %}

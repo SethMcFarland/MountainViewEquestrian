@@ -37,8 +37,11 @@ $(document).ready(function() {
 						else if(enroll_status == "Join Waitlist")
 							$('#event_details_button').click({id: event.id, type: 1}, waitlist_handler);
 
-						else
+						else if(enroll_status == "Drop Waitlist")
 							$('#event_details_button').click({id: event.id, type: 0}, waitlist_handler);
+
+						else
+							$('#event_details_button').click(open_login);
 
 					},
 
@@ -71,6 +74,14 @@ $(document).ready(function() {
 	});
 
 });
+
+
+function open_login() {
+
+	reset_modal();
+	$('#login_or_reg_modal').foundation('open');
+	
+}
 
 
 function waitlist_handler(e) {

@@ -14,18 +14,26 @@ def event_details(request):
 	event_time = event.start_date.strftime("%-I:%-M %p to ") + event.end_date.strftime("%-I:%-M %p")
 	event_backup_date = event.backup_start_date.strftime("%B %d, %Y at %-I:%-M %p")
 
-	enrolled = 0
-	print("before conditional")
+
+	button_text = "Sign Up"
+
 	if request.user.is_authenticated():
 		if event in request.user.enrolled_events.all():
-			print("event found")
-			enrolled = 1
+			button_text = "Unenroll"
 
 		elif event in request.user.waitlisted_events.all():
-			print("event waitlist")
-			enrolled = 2
+			button_text = "Drop Waitlist"
 
-	html = render_to_string('events/partials/event_details.html', {'event': event, 'event_date': event_date, 'event_time': event_time, 'event_backup_date': event_backup_date, 'address': event.address, 'enrolled': enrolled}, request=request)
+		elif event.status == 1:
+			button_text = "Sign Up"
+
+		else:
+			button_text = "Join Waitlist"
+
+	else:
+		button_text = "Sign In"
+
+	html = render_to_string('events/partials/event_details.html', {'event': event, 'event_date': event_date, 'event_time': event_time, 'event_backup_date': event_backup_date, 'address': event.address, 'button_text': button_text}, request=request)
 	return HttpResponse(html)
 
 
