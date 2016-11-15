@@ -145,7 +145,7 @@ function horse_registration(e) {
 
 				$('#no_horses').hide();
 				var parsed_response = $.parseJSON(response);
-				$("<tr class='horse_details_table_item' id='" + parsed_response[0]["pk"] + "'><td>" + parsed_response[0]["fields"]["name"] + "</td></tr>").appendTo("#horse_list");
+				$("<tr class='horse_details_table_item' id='horse_" + parsed_response[0]["pk"] + "'><td>" + parsed_response[0]["fields"]["name"] + "</td></tr>").appendTo("#horse_list");
 				$('.horse_details_table_item').click(horse_details_handler);
 				$('#horse_registration_form')[0].reset();
 				$('#register_horse_modal').foundation('close');
