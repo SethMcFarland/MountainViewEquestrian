@@ -4,8 +4,9 @@ body {
 
 .main {
 	background-color: white;
-	margin-top: 1.5em;
 	box-shadow: 0.75em 0.75em #0f0b0b;
+	width: 60em;
+	margin: 1.5em auto;
 }
 
 .row.full-width {
@@ -85,3 +86,59 @@ body {
 	cursor: hand;
 
 } 
+
+.main_title_text {
+
+	font-family: "Cinzel", serif;
+	font-weight: 400;
+	font-size: 48px;
+	text-align: center;
+	color: black;
+
+}
+
+.main_title_text:hover {
+
+	color: black;
+
+}
+
+.sub_title_text {
+
+	font-family: "Quattrocento Sans", sans-serif;
+	font-weight: 400;
+	font-size: 12px;
+	font-style: italic;
+	clear: right;
+	float: right;
+	margin: 2.75em 0 0.3em 0;
+	opacity: .65;
+	width: 15em;
+
+	color: black;
+
+	padding-top: ;
+
+}
+
+.title_container {
+
+	margin-top: 0.75em;
+	margin-left: 0.5em;
+
+}
+
+.banner_container {
+
+	background-color: black;
+	padding: 0.5em 0 0 0;
+
+
+}
+
+.banner_row {
+
+	margin-left: 0.95em !important;
+	margin-right: 0.95em !important;
+
+}

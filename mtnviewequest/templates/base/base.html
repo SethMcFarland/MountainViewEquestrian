@@ -3,6 +3,7 @@
 <html>
 	<head>
 		<title>Mountain View Equestrian</title>
+		<link href="https://fonts.googleapis.com/css?family=Cinzel|Quattrocento+Sans" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation.css" />
 		<link rel="stylesheet" type="text/css" href="{% static "base/css/app.css" %}" />
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" />
@@ -12,12 +13,50 @@
 		{% endblock head %}
 	</head>
 	<body>
+		<div class="main">
+			<div class="row">
+				<div class="title_container">
+					<div class="small-12 large-12 columns">
+						<span class="float-left">
+							<a class="main_title_text">Mountain View Equestrian</a>
+						</span>
+						<span>
+							<p class="sub_title_text">English & Western Disciplines</p>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="row banner_row">
+				<div class="small-12 small-centered large-12 large-centered columns banner_container">
+					<img class="float-center" data-interchange="[static/base/img/3_pic_banner.png, large]">
+				</div>
+			</div>
+			{% block content %}
+			{% endblock content %}
+		</div>
+		<!--
 		<div class="row" style="height: 500px;">
 			<div class="small-10 small-centered large-10 large-centered columns main">
-				{% block content %}
-				{% endblock content %}
+				<div class="row">
+					<div class="title_container">
+						<div class="small-12 large-12 columns">
+							<span class="float-left">
+								<a class="main_title_text">Mountain View Equestrian</a>
+							</span>
+							<span>
+								<p class="sub_title_text">English & Western Disciplines</p>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="row banner_row">
+					<div class="small-12 small-centered large-12 large-centered columns banner_container">
+						<img class="float-center" data-interchange="[static/base/img/3_pic_banner.png, large]">
+					</div>
+				</div>
+
 			</div>
-		</div>
+		</div>-->
 
 
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation.js"></script>
