@@ -5,8 +5,8 @@ body {
 .main {
 	background-color: white;
 	box-shadow: 0.75em 0.75em #0f0b0b;
-	width: 60em;
-	margin: 1.5em auto;
+	width: 61em;
+	margin: 1.25em auto;
 }
 
 .row.full-width {
@@ -74,9 +74,7 @@ body {
 
 	color: #A9A9A9;
 	position: absolute;
-	/*right: 0.9em;
-	bottom: 0.25em;
-*/
+
 }
 
 .back_arrow:hover {
@@ -109,15 +107,13 @@ body {
 	font-weight: 400;
 	font-size: 12px;
 	font-style: italic;
+	text-align: center;
 	clear: right;
-	float: right;
 	margin: 2.75em 0 0.3em 0;
 	opacity: .65;
 	width: 15em;
 
 	color: black;
-
-	padding-top: ;
 
 }
 
@@ -131,14 +127,48 @@ body {
 .banner_container {
 
 	background-color: black;
-	padding: 0.5em 0 0 0;
+	padding: 0.2em 0 0 0;
 
 
 }
 
 .banner_row {
 
-	margin-left: 0.95em !important;
-	margin-right: 0.95em !important;
+	margin-left: 1.25em !important;
+	margin-right: 1.25em !important;
+
+}
+
+.menu {
+
+	vertical-align: middle;
+
+}
+.nav_menu_link {
+
+	font-family: "Cinzel", serif;
+	font-weight: 400;
+	font-size: 1.25em;
+	text-align: center;
+	color: #aaa;
+
+}
+
+.nav_menu_link:hover {
+
+	background: #333;
+	color: #fff;
+
+}
+
+.nav_menu_link:focus {
+
+	color: #fff;
+
+}
+
+.nav_menu_item {
+
+	margin-bottom: 0px;
 
 }
