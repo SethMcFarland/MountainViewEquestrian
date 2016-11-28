@@ -8,6 +8,10 @@ from .models import Event, Address
 from django.contrib.auth.models import User
 
 
+def event_calendar(request):
+	return render(request, 'events/events.html')
+
+
 def event_details(request):
 	event = get_object_or_404(Event, pk=request.GET.get('eid'))
 	event_date = event.start_date.strftime("%B %d, %Y at %-I:%-M %p")

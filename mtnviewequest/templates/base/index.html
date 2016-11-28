@@ -2,60 +2,10 @@
 {% load static %}
 {% load custom_filters %}
 
-{% block head %}
-	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.css" />
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
-	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.js"></script>
-	<script type="text/javascript" src="{% static "events/js/events.js" %}"></script>
-{% endblock head %}
-
 {% block content %}
-	<div class="row fullwidth">
-		<div class="small-12 large-12 columns">
-			<div class="row fullwidth">
-				<div class="small-8 small-centered large-8 large-centered columns">
-					{% if request.user.is_authenticated %}
-						<h5><a>{{ request.user.username }}</a></h5>
-						<a href="{% url "users:logout" %}">Logout</a>
-					{% else %}
-						<div class="reveal" id="login_or_reg_modal" data-reveal>
-							<i class="fa fa-arrow-left fa-2 back_arrow" aria-hidden="true"></i>
-							<div id="login_or_reg_modal_contents">
-								<p class="text-center">
-									<a id="modal_login_link">Login</a>
-									or
-									<a id="modal_register_link">Register</a>
-								</p>
-							</div>
-							<button class="close-button" data-close aria-label="Close modal" type="button">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<p><a data-open="login_or_reg_modal" id="login_or_reg_modal_link">Login or Register</a></p>
-					{% endif %}
-				</div>
-			</div>
-			<div class="row">
-				<div class="small-8 small-centered large-8 large-centered columns">
-					<div id="event_calendar">
-					</div>
-				</div>
-			</div>
+	<div class="row">
+		<div class="small-12 large-12 columns sub_page_main">
+			<h3>Home</h3>
 		</div>
-	</div>
-	<div class="reveal" id="event_details_modal" data-reveal>
-		<i class="fa fa-arrow-left fa-2 back_arrow" aria-hidden="true"></i>
-		<div id="event_details_modal_contents">
-		</div>
-		<button class="close-button" data-close aria-label="Close modal" type="button">
-			<span aria-hidden="true">&times;</span>
-		</button>
 	</div>
 {% endblock %}
-{% block scripts %}
-	<script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
-    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-	<!--<script type="text/babel" src="{% static "base/js/app.js" %}"></script>-->
-	<script type="text/javascript" src="{% static "users/js/modalforms.js" %}"></script>
-{% endblock scripts %}

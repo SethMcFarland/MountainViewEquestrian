@@ -18,7 +18,7 @@
 				<div class="title_container">
 					<div class="small-12 large-12 columns">
 						<span class="float-left">
-							<a class="main_title_text">Mountain View Equestrian</a>
+							<a class="main_title_text" href="/">Mountain View Equestrian</a>
 						</span>
 						<span style="float: right; width: 25%;">
 							<p class="sub_title_text">English & Western Disciplines</p>
@@ -28,46 +28,51 @@
 			</div>
 			<div class="row banner_row">
 				<div class="small-12 small-centered large-12 large-centered columns banner_container">
-					<img class="float-center" data-interchange="[static/base/img/3_pic_banner.png, large]">
+					<img class="float-center" data-interchange="[{% static "base/img/3_pic_banner.png" %}, large]">
 					<div class="menu-centered">
 						<ul class="menu">
-							<li class="nav_menu_item"><a class="nav_menu_link" href="#">Home</a></li>
-							<li class="nav_menu_item"><a class="nav_menu_link" href="#">About Us</a></li>
+							<li class="nav_menu_item"><a class="nav_menu_link" href="/">Home</a></li>
+							<li class="nav_menu_item"><a class="nav_menu_link" href="/about/">About Us</a></li>
 							<li class="nav_menu_item"><a class="nav_menu_link" href="#">Services</a></li>
-							<li class="nav_menu_item"><a class="nav_menu_link" href="#">Clinics and Events</a></li>
+							<li class="nav_menu_item"><a class="nav_menu_link" href="{% url "events:calendar" %}">Clinics and Events</a></li>
 							<li class="nav_menu_item"><a class="nav_menu_link" href="#">Photo + Video</a></li>
 							<li class="nav_menu_item"><a class="nav_menu_link" href="#">Contact Us</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
-			{% block content %}
-			{% endblock content %}
-		</div>
-		<!--
-		<div class="row" style="height: 500px;">
-			<div class="small-10 small-centered large-10 large-centered columns main">
-				<div class="row">
-					<div class="title_container">
-						<div class="small-12 large-12 columns">
-							<span class="float-left">
-								<a class="main_title_text">Mountain View Equestrian</a>
-							</span>
-							<span>
-								<p class="sub_title_text">English & Western Disciplines</p>
-							</span>
+			<div class="row">
+				<div class="small-12 small-centered large-12 large-centered columns main_content">
+					<div class="row">
+						<div class="small-8 large-8 columns center_text" style="border-width: 0 1px 0 0; border-style: solid;">
+							{% block content %}
+							{% endblock content %}
+						</div>
+						<div class="small-4 large-4 columns right_col center_text">
+							{% if request.user.is_authenticated %}
+								<h5><a>{{ request.user.username }}</a></h5>
+								<a href="{% url "users:logout" %}">Logout</a>
+							{% else %}
+								<p><a data-open="login_or_reg_modal" id="login_or_reg_modal_link">Login or Register</a></p>
+							{% endif %}
 						</div>
 					</div>
 				</div>
-				<div class="row banner_row">
-					<div class="small-12 small-centered large-12 large-centered columns banner_container">
-						<img class="float-center" data-interchange="[static/base/img/3_pic_banner.png, large]">
-					</div>
-				</div>
-
 			</div>
-		</div>-->
-
+		</div>
+		<div class="reveal" id="login_or_reg_modal" data-reveal>
+			<i class="fa fa-arrow-left fa-2 back_arrow" aria-hidden="true"></i>
+			<div id="login_or_reg_modal_contents">
+				<p class="text-center">
+					<a id="modal_login_link">Login</a>
+					or
+					<a id="modal_register_link">Register</a>
+				</p>
+			</div>
+			<button class="close-button" data-close aria-label="Close modal" type="button">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
 
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation.js"></script>
 		<script>
@@ -75,6 +80,7 @@
 				$(document).foundation();
 			})
 		</script>
+		<script type="text/javascript" src="{% static "users/js/modalforms.js" %}"></script>
 		{% block scripts %}
 		{% endblock scripts %}
 	</body>

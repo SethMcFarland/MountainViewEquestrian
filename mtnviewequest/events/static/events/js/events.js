@@ -4,11 +4,16 @@ $(document).ready(function() {
 
 	var calendar = $('#event_calendar').fullCalendar({
 
-		header:
+		title: 'Upcoming Events',
+
+		/*header:
 		{
-			left: 'seth',
-			right: ''
-		},
+			left: '',
+			right: '',
+			center: 'title'
+		},*/
+
+		header: false,
 
 		events: '/event/get_all',
 
