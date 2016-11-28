@@ -149,7 +149,7 @@ body {
 
 .sub_page_main {
 
-	margin-top: 0.75em;
+	margin-top: 2em;
 }
 
 .right_col {
@@ -196,4 +196,73 @@ body {
 
 	text-align: center;
 
+}
+
+.article_head {
+
+	margin-bottom: 0.5em;
+	font-family: "Cinzel", serif;
+	font-size: 2.2em;
+	font-weight: 400;
+
+}
+
+.article_text {
+
+	font-family: "Quattrocento Sans", sans-serif;
+	font-size: 1em;
+	font-weight: 400;
+
+}
+
+.footer {
+
+	margin-left: 1.5em;
+	margin-right: 1.5em;
+	margin-top: 2em;
+
+}
+
+.facebook_button {
+
+	padding: 0.4em 0.3em 0.4em 0.3em;
+	background-color: white;
+	color: #777777;
+	border: solid thin #777777;
+	border-radius: 0.25em 0.25em 0.25em 0.25em;
+
+}
+
+.facebook_button:hover {
+
+	background-color: #3B5998;
+
+}
+
+.facebook_button:focus {
+
+	background-color: #3B5998;
+}
+
+.twitter_button {
+
+	padding: 0.4em 0.3em 0.4em 0.3em;
+	margin-left: 0.5em;
+	background-color: white;
+	color: #777777;
+	border: solid thin #777777;
+	border-radius: 0.25em 0.25em 0.25em 0.25em;
+
+}
+
+.twitter_button:hover {
+
+	background-color: #1DA1F2;
+
+}
+
+.twitter_button:focus {
+
+	background-color: #1DA1F2;
+	
 }

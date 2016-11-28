@@ -1,0 +1,40 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+	<div class="row">
+		<div class="small-12 large-12 columns sub_page_main">
+			{% if message %}
+				<h3>{{message}}</h3>
+			{% endif %}
+			<form action="/contact/" method="post" id="contact_form">
+				{% csrf_token %}
+				{% for field in form %}
+					<div class="field_wrapper">
+						{% if field.errors %}
+							{{ field.label_tag }} {{ field|addattrs:"class,input_error" }}
+							{% for err in field.errors %}
+								<div class="field_error_list"><p class="field_error">{{ err }}</p></div>
+							{% endfor %}
+						{% else %}
+							{{ field.label_tag }} {{ field }}
+						{% endif %}
+					</div>			
+				{% endfor %}
+				{% if form.non_field_errors %}
+					<div class="non_field_error_list">
+						{% for err in form.non_field_errors %}
+							<p class="non_field_error">{{ err }}</p>
+						{% endfor %}
+					</div>							
+				{% endif %}
+				<div class="row">
+					<div class="small-12 large-12 columns">
+						<button type="submit" form="contact_form" value="Submit" class="button float-center">Submit</button>	
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+{% endblock %}
