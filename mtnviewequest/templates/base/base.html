@@ -35,7 +35,7 @@
 							<li class="nav_menu_item"><a class="nav_menu_link" href="/about/">About Us</a></li>
 							<li class="nav_menu_item"><a class="nav_menu_link" href="/services/">Services</a></li>
 							<li class="nav_menu_item"><a class="nav_menu_link" href="{% url "events:calendar" %}">Clinics and Events</a></li>
-							<li class="nav_menu_item"><a class="nav_menu_link" href="#">Photo + Video</a></li>
+							<li class="nav_menu_item"><a class="nav_menu_link" href="/gallery/">Photo + Video</a></li>
 							<li class="nav_menu_item"><a class="nav_menu_link" href="/contact/">Contact Us</a></li>
 						</ul>
 					</div>
@@ -44,26 +44,27 @@
 			<div class="row">
 				<div class="small-12 small-centered large-12 large-centered columns main_content">
 					<div class="row">
-						<div class="small-8 large-8 columns" style="border-width: 0 1px 0 0; border-style: solid; border-color: #aaa">
+						<div class="small-8 large-8 columns" style="border-width: 0 1px 0 0; border-style: solid; border-color: #aaa; padding-bottom: 2em;">
 							{% block content %}
 							{% endblock content %}
 						</div>
 						<div class="small-4 large-4 columns right_col center_text">
 							{% if request.user.is_authenticated %}
-								<h5><a>{{ request.user.username }}</a></h5>
-								<a href="{% url "users:logout" %}">Logout</a>
+								<p><a class="username_link" href="/user/{{request.user.id}}">{{ request.user.username }}</a></p>
+								<a class="login_link" href="{% url "users:logout" %}">Logout</a>
 							{% else %}
-								<p><a data-open="login_or_reg_modal" id="login_or_reg_modal_link">Login or Register</a></p>
+								<p><a class="login_link" data-open="login_or_reg_modal" id="login_or_reg_modal_link">Login or Register</a></p>
 							{% endif %}
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="small-3 large-3 columns footer center_text">
+				<div class="small-4 large-4 columns footer center_text">
 					<div style="padding-top: 0.5em; border-top: 0.05em dotted #aaa">
 						<button class="button facebook_button"><i class="fa fa-facebook-square" aria-hidden="true"></i>&nbspFacebook</button>
 						<button class="button twitter_button"><i class="fa fa-twitter-square" aria-hidden="true"></i>&nbspTwitter</button>
+						<button class="button instagram_button"><i class="fa fa-instagram" aria-hidden="true"></i>&nbspInstagram</button>
 					</div>
 				</div>
 			</div>

@@ -150,11 +150,12 @@ body {
 .sub_page_main {
 
 	margin-top: 2em;
+
 }
 
 .right_col {
 
-	margin-top: 1.2em;
+	margin-top: 2em;
 
 }
 
@@ -233,18 +234,16 @@ body {
 
 }
 
-.facebook_button:hover {
-
-	background-color: #3B5998;
-
-}
-
+.facebook_button:hover,
 .facebook_button:focus {
 
 	background-color: #3B5998;
+	outline: none;
+
 }
 
-.twitter_button {
+.twitter_button, 
+.instagram_button {
 
 	padding: 0.4em 0.3em 0.4em 0.3em;
 	margin-left: 0.5em;
@@ -255,14 +254,47 @@ body {
 
 }
 
-.twitter_button:hover {
-
-	background-color: #1DA1F2;
-
-}
-
+.twitter_button:hover,
 .twitter_button:focus {
 
 	background-color: #1DA1F2;
-	
+	outline: none;
+
+}
+
+.instagram_button:hover,
+.instagram_button:focus {
+
+	background-color: #262626;
+	outline: none;
+
+}
+
+.username_link {
+
+	font-family: "Quattrocento Sans", sans-serif;
+	font-size: 1.2em;
+	font-weight: 400;
+	color: black;
+
+}
+
+.login_link {
+
+	font-family: "Quattrocento Sans", sans-serif;
+	font-size: 1em;
+	font-weight: 400;
+	color: black;
+
+}
+
+.login_link:hover,
+.login_link:visited,
+.username_link:hover,
+.username_link:visited {
+
+	color: black;
+	text-decoration: none;
+	border-bottom: 0.12em solid black;
+
 }
