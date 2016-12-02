@@ -298,3 +298,67 @@ body {
 	border-bottom: 0.12em solid black;
 
 }
+
+.accordion-title {
+
+	font-family: "Quattrocento Sans", sans-serif;
+	font-size: 1em;
+	font-weight: 400;
+	color: black;
+
+}
+
+.accordion-title:hover,
+.accordion-title:focus {
+
+	font-color: black !important;
+	color: black;
+
+}
+
+.default_button {
+
+	font-family: "Quattrocento Sans", sans-serif;
+	font-weight: 400;
+	background-color: black;
+	color: #aaa;
+	border-radius: 0.5em 0.5em 0.5em 0.5em;
+
+}
+
+.default_button:hover,
+.default_button:focus {
+
+	background-color: #333;
+	color: #fff;
+
+}
+
+.reveal {
+
+	outline-color: #372929;
+
+}
+
+a {
+
+	font-family: "Quattrocento Sans", sans-serif;
+	font-size: 1em;
+	font-weight: 400;
+	color: black;
+
+}
+
+a:hover {
+
+	color: black;
+	text-decoration: underline;
+
+}
+
+a:visited,
+a:focus {
+
+	color: black;
+	
+}

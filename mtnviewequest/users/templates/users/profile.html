@@ -2,9 +2,9 @@
 {% load static %}
 
 {% block content %}
-	<div class="row fullwidth">
+	<div class="row fullwidth sub_page_main">
 		<div class="small-12 large-12 columns">
-			<h3> Welcome {{ user.first_name }}! </h3>
+			<h3 class="article_head"> Welcome {{ user.first_name }}! </h3>
 		</div>
 	</div>
 	<div class="row fullwidth">
@@ -23,7 +23,7 @@
 						<h5 id="no_horses">No horses registered</h5>
 					{% endif %}
 					<div style="margin-top: 1em;">
-						<a class="button" data-open="register_horse_modal" id="horse_registration">Register a horse</a>
+						<a class="button default_button" data-open="register_horse_modal" id="horse_registration">Register Horse</a>
 					</div>
 				</div>
 			</li>
