@@ -48,13 +48,34 @@ def event_signup(request):
 		
 		return HttpResponse(html)
 
-	else:
+	elif request.GET.get('type') == '0':
 		event = get_object_or_404(Event, pk=request.GET.get('eid'))
 		user = get_object_or_404(User, pk=request.user.id)
 		event.users.remove(user)
 		html = render_to_string('events/partials/event_unenroll.html', {'event': event}, request=request)
 
 		return HttpResponse(html)
+
+	else:
+		paypal_response = request.json();
+		event = get_object_or_404(Event, pk=paypal_response["form"]["item_number"])
+		user = get_object_or_404(User, pk=request.user.id)
+
+
+def event_waitlist(request):
+	event = get_object_or_404(Event, pk=request.GET.get('eid'))
+	user = get_object_or_404(User, pk=request.user.id)	
+
+	if request.GET.get('type') == '1':
+		print("adding user to waitlist")
+		event.waitlist.add(user)
+	else:
+		print("removing user from waitlist")
+		event.waitlist.remove(user)
+
+	print("I'm here")
+
+	return HttpResponse(status=200)
 
 
 def unenroll_event(request):

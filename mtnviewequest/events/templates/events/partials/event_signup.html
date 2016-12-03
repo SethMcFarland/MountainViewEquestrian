@@ -3,44 +3,50 @@
 		<h3 class="text-center"> {{ event.name }} </h3>
 	</div>
 </div>
-<div id="deposit_or_full_section">
-	<div class="row">
-		<div class="small-8 small-centered large-8 large-centered columns">
-			<h5 class="text-center">Would you like to pay in full now?</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="small-2 small-centered large-2 large-centered columns">
-			<div class="switch absolute-center">
-				<input class="switch-input" id="deposit_or_full" type="checkbox" name="deposit_or_full">
-				<label class="switch-paddle" for="deposit_or_full">
-					<span class="show-for-sr">Pay full or deposit</span>
-					<span class="switch-active" aria-hidden="true">Yes</span>
-    				<span class="switch-inactive" aria-hidden="true">No</span>
-				</label>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="small-4 small-centered large-4 large-centered columns">
-			<button class="button default_button float-center form_submit" id="continue_signup_button">Continue</button>
-		</div>
-	</div>
-</div>
-<div id="payment_section" hidden>
-	<div class="row">
-		<div class="small-12 large-12 columns">
-			<h3 class="text-center">Paypal</h3>
-		</div>
-	</div>
-	<div class="row">
-		<div class="small-12 large-12 columns">
-			<h3 class="text-center">or</h3>
-		</div>
-	</div>
-	<div class="row">
-		<div class="small-12 large-12 columns">
-			<h3 class="text-center">Cash by Square</h3>
-		</div>
+<div class="row">
+	<div class="small-12 large-12 columns">
+		<!--<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+			<input type="hidden" name="cmd" value="_s-xclick">
+			<input type="hidden" name="hosted_button_id" value="UC2QDGTLGPCH6">
+			<table>
+				<tr><td><input type="hidden" name="on0" value="Full Fee or Deposit">Full Fee or Deposit</td></tr><tr><td><select name="os0">
+					<option value="Deposit">Deposit $10.00 USD</option>
+					<option value="Full Fee">Full Fee $100.00 USD</option>
+				</select> </td></tr>
+				<tr><td><input type="hidden" name="on1" value="Number of Horses">Number of Horses</td></tr><tr><td><select name="quantity">
+					<option value="1">1 </option>
+					<option value="2">2 </option>
+					<option value="3">3 </option>
+					<option value="4">4 </option>
+					<option value="5">5 </option>
+				</select> </td></tr>
+			</table>
+			<div id="horse_name_list"></div>
+			<input type="hidden" name="return" value="google.com">
+			<input type="hidden" name="currency_code" value="USD">
+			<input type="image" class="center_block" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+			<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+		</form>-->
+		<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+			<input type="hidden" name="cmd" value="_s-xclick">
+			<input type="hidden" name="hosted_button_id" value="8H4PRLP7RVGMC">
+			<table>
+			<tr><td><input type="hidden" name="on0" value="Full Fee or Deposit">Full Fee or Deposit</td></tr><tr><td><select name="os0">
+				<option value="Full Fee">Full Fee $100.00 USD</option>
+				<option value="Deposit">Deposit $10.00 USD</option>
+			</select> </td></tr>
+			<tr><td><input type="hidden" name="on1" value="quantity">Number of Horses</td></tr><tr><td><select name="quantity">
+				<option value="1">1 </option>
+				<option value="2">2 </option>
+				<option value="3">3 </option>
+				<option value="4">4 </option>
+				<option value="5">5 </option>
+			</select> </td></tr>
+			</table>
+			<input type="hidden" value="2" name="rm">
+			<input type="hidden" name="currency_code" value="USD">
+			<input type="image" class="center_block" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+			<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+		</form>
 	</div>
 </div>

@@ -6,14 +6,9 @@ $(document).ready(function() {
 
 		title: 'Upcoming Events',
 
-		/*header:
-		{
-			left: '',
-			right: '',
-			center: 'title'
-		},*/
-
 		header: false,
+
+		height: 'auto',
 
 		events: '/event/get_all',
 
@@ -58,23 +53,6 @@ function event_details_handler(event, js_event, view) {
 				window.event_details_content = response;
 
 				set_details_button_listener(event.id);
-/*
-				var enroll_status = $('#event_details_button').text();
-
-				if(enroll_status == "Sign Up")
-					$('#event_details_button').click({id: event.id, type: 1, event: event, js_event: js_event, view: view}, signup_handler);
-
-				else if(enroll_status == "Unenroll")
-					$('#event_details_button').click({id: event.id, type: 0, event: event, js_event: js_event, view: view}, signup_handler);
-
-				else if(enroll_status == "Join Waitlist")
-					$('#event_details_button').click({id: event.id, type: 1, event: event, js_event: js_event, view: view}, waitlist_handler);
-
-				else if(enroll_status == "Drop Waitlist")
-					$('#event_details_button').click({id: event.id, type: 0, event: event, js_event: js_event, view: view}, waitlist_handler);
-
-				else
-					$('#event_details_button').click(open_login);*/
 
 			},
 
@@ -136,6 +114,7 @@ function waitlist_handler(e) {
 
 		success: function(response) {
 
+/*
 			$('.back_arrow').unbind("click");
 
 			$('#event_details_modal_contents').html(response)
@@ -145,7 +124,20 @@ function waitlist_handler(e) {
 				$('#event_details_modal_contents').html(window.event_details_content);
 				set_details_button_listener(e.data.id);
 
-			});
+			});*/
+
+			$('#event_details_button').unbind('click');
+
+			if(e.data.type == 1) {
+				$('#event_details_button').text('Drop Waitlist');
+				$('#event_details_button').click({id: e.data.id, type: 0}, waitlist_handler);
+			}
+
+			else if(e.data.type == 0) {
+				$('#event_details_button').text('Join Waitlist');
+				$('#event_details_button').click({id: e.data.id, type: 1}, waitlist_handler);
+			}
+			console.log("joined waitlist")
 
 		},
 
@@ -182,9 +174,6 @@ function signup_handler(e) {
 				
 			});
 
-			if(e.data.type == 1)
-				$('#continue_signup_button').click({id: e.data.id}, event_continue_handler);
-
 		},
 
 		error: function(response) {
@@ -192,28 +181,6 @@ function signup_handler(e) {
 			console.log("Error at signup_handler ajax call");
 
 		}
-
-	});
-
-}
-
-
-function event_continue_handler(e) {
-
-	$('#deposit_or_full_section').attr("hidden", "true");
-	$('#payment_section').removeAttr("hidden");
-
-	$('.back_arrow').unbind("click");
-	$('.back_arrow').click(function() {
-
-		$('#deposit_or_full_section').removeAttr("hidden");
-		$('#payment_section').attr("hidden", "true");
-
-		$('.back_arrow').unbind("click");
-		$('.back_arrow').click(function() {
-			$('#event_details_modal_contents').html(window.event_details_content);
-			set_details_button_listener(e.data.id);
-		});
 
 	});
 

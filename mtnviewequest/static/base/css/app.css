@@ -2,6 +2,20 @@ body {
 	background-color: #372929;
 }
 
+a:hover {
+
+	color: black;
+	text-decoration: underline;
+
+}
+
+a:visited,
+a:focus {
+
+	color: black;
+
+}
+
 .main {
 	background-color: white;
 	box-shadow: 0.75em 0.75em #0f0b0b;
@@ -164,7 +178,7 @@ body {
 	vertical-align: middle;
 
 }
-.nav_menu_link {
+a.nav_menu_link {
 
 	font-family: "Cinzel", serif;
 	font-weight: 400;
@@ -174,16 +188,12 @@ body {
 
 }
 
-.nav_menu_link:hover {
+.nav_menu_link:hover,
+.nav_menu_link:focus {
 
 	background: #333;
 	color: #fff;
-
-}
-
-.nav_menu_link:focus {
-
-	color: #fff;
+	text-decoration: none;
 
 }
 
@@ -197,6 +207,13 @@ body {
 
 	text-align: center;
 
+}
+
+.center_block {
+
+	display: block;
+	margin: auto;
+	
 }
 
 .article_head {
@@ -347,18 +364,4 @@ a {
 	font-weight: 400;
 	color: black;
 
-}
-
-a:hover {
-
-	color: black;
-	text-decoration: underline;
-
-}
-
-a:visited,
-a:focus {
-
-	color: black;
-	
 }
