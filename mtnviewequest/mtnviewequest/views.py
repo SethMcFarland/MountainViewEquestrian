@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.conf import settings
+from django.core.mail import EmailMessage
 import os
+import django_rq
 
 from .forms import ContactForm
 
@@ -15,15 +17,27 @@ def services(request):
 
 def contact(request):
 	if request.method == 'POST':
-		form = ContactForm(request.POST);
+		form = ContactForm(prefix="contact", data=request.POST);
 
 		if form.is_valid():
+			queue = django_rq.get_queue('default')
+			
+			email = EmailMessage(
+				subject='New Message From ' + request.user.first_name + ' ' + request.user.last_name,
+				body=form.cleaned_data.get('message'),
+				from_email='mountainviewequest@outlook.com',
+				to=['sethmcfarland@outlook.com',],
+				reply_to=[form.cleaned_data.get('email'),],
+			)
+			
+			queue.enqueue(send_email, email)
+
 			message = "Success"
 			form = ContactForm();
 			return render(request, 'base/contact.html', {'form': form, 'message': message})
 
 	else:
-		form = ContactForm();
+		form = ContactForm(prefix="contact");
 
 	return render(request, 'base/contact.html', {'form': form})
 
@@ -34,3 +48,10 @@ def gallery(request):
 	orbit_pic_set = [gallery_path + picpath for picpath in orbit_pic_set]
 
 	return render(request, 'base/gallery.html', {'orbit_pic_set': orbit_pic_set})
+
+
+
+################# HELPERS #################
+
+def send_email(email):
+	email.send(fail_silently=False)

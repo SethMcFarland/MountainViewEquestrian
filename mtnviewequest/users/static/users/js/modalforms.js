@@ -125,6 +125,7 @@ function register_handler() {
 function login_form_submit(e) {
 
 	e.preventDefault();
+	console.log("posting login uname: " + $('#id_email').val() + "   pword: " + $('#id_password').val());
 
 	$.ajax({
 

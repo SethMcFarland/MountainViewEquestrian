@@ -17,11 +17,14 @@ def user_login(request):
 
 	if request.method == 'POST':
 		form = UserLoginForm(request.POST)
+		print("post true")
 
 		if form.is_valid():
 			user = User.objects.filter(email=form.cleaned_data.get("email"))
+			print("valid form")
 
 			if user.exists() and len(user) == 1:
+				print("user exists")
 				user = authenticate(username=user[0].username, password=form.cleaned_data['password'])
 				login(request, user)
 				response = {'uid': user.id}

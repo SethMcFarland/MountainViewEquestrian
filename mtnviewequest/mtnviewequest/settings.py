@@ -31,18 +31,21 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'dateutil',
-    'events',
-    'users',
-    'django_extensions',
-    'crispy_forms',
-    'crispy_forms_foundation',
+    # Default
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # My Apps
+    'events',
+    'users',
+    # 3rd Party Apps
+    'dateutil',
+    'django_extensions',
+    'django_redis',
+    'django_rq',
 ]
 
 MIDDLEWARE = [
@@ -129,7 +132,22 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
-# Add 'foundation-5' layout pack
-CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'uni_form', 'bootstrap3', 'foundation-5')
-# Default layout to use with "crispy_forms"
-CRISPY_TEMPLATE_PACK = 'foundation-5'
+
+# Email Settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp-mail.outlook.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'mountainviewequest@outlook.com'
+EMAIL_HOST_PASSWORD = 'pinhead77'
+
+
+# RQ Settings
+RQ_QUEUES = {
+    'default': {
+        'HOST': 'localhost',
+        'PORT': 6379,
+        'DB': 0,
+        'DEFAULT_TIMEOUT': 360,
+    },
+}
