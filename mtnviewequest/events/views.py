@@ -2,9 +2,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
 from django.http import HttpResponse, JsonResponse
 from django.core import serializers
+from django.views.decorators.csrf import csrf_exempt
+from django.core.mail import EmailMessage
+import django_rq
 import dateutil.parser, datetime, json
 
+from .helpers import send_email
 from .models import Event, Address
+from users.forms import HorseRegistrationForm
 from django.contrib.auth.models import User
 
 
@@ -40,7 +45,7 @@ def event_details(request):
 	html = render_to_string('events/partials/event_details.html', {'event': event, 'event_date': event_date, 'event_time': event_time, 'event_backup_date': event_backup_date, 'address': event.address, 'button_text': button_text}, request=request)
 	return HttpResponse(html)
 
-
+@csrf_exempt
 def event_signup(request):
 	if request.GET.get('type') == '1':
 		event = get_object_or_404(Event, pk=request.GET.get('eid'))
@@ -57,9 +62,33 @@ def event_signup(request):
 		return HttpResponse(html)
 
 	else:
-		paypal_response = request.json();
-		event = get_object_or_404(Event, pk=paypal_response["form"]["item_number"])
-		user = get_object_or_404(User, pk=request.user.id)
+		paypal_response = json.loads(request.body.decode('utf-8'))
+		name_id = paypal_response["form"]["item_name"]
+
+		event = get_object_or_404(Event, pk=name_id.split('-', 1)[1])
+		user = get_object_or_404(User, pk=1)
+		event.users.add(user)
+
+		queue = django_rq.get_queue('default')
+			
+		email = EmailMessage(
+			subject='Order Summary',
+			body='Thank you for your order, your payment has been received',
+			from_email='mountainviewequest@outlook.com',
+			to=['sethmcfarland@outlook.com',],
+			reply_to=['mountainviewequest@outlook.com',],
+		)
+		
+		queue.enqueue(send_email, email)
+
+		form = HorseRegistrationForm()
+
+		return render(request, 'events/signup_complete.html', {'event': event, 'form': form})
+
+
+def event_signup_complete(request):
+	user = get_object_or_404(User, pk=request.user.id)
+
 
 
 def event_waitlist(request):
