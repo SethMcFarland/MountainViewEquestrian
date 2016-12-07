@@ -1,7 +1,12 @@
+click==6.6
 crispy-forms-foundation==0.5.4
 Django==1.10.1
 django-crispy-forms==1.6.0
 django-extensions==1.7.4
+django-redis==4.6.0
+django-rq==0.9.4
 python-dateutil==2.5.3
+redis==2.10.5
 requests==2.11.1
+rq==0.7.0
 six==1.10.0
