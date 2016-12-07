@@ -84,6 +84,7 @@ def user_registration(request):
 							description=form.cleaned_data.get('horse_description'),
 							status=3
 						)
+				horse.owner = user
 				horse.save()
 
 			else:
