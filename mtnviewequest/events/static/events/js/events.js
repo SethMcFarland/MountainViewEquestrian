@@ -17,10 +17,10 @@ $(document).ready(function() {
 		loading: function( isLoading, view) {
 
 			if(isLoading) {
-				console.log("loading");
+				//console.log("loading");
 			}
 			else {
-				console.log("done");
+				//console.log("done");
 			}
 
 		},
@@ -58,7 +58,7 @@ function event_details_handler(event, js_event, view) {
 
 			error: function(response) {
 
-				console.log("Error at event_details_handler ajax call");
+				//console.log("Error at event_details_handler ajax call");
 
 			}
 
@@ -137,13 +137,13 @@ function waitlist_handler(e) {
 				$('#event_details_button').text('Join Waitlist');
 				$('#event_details_button').click({id: e.data.id, type: 1}, waitlist_handler);
 			}
-			console.log("joined waitlist")
+			//console.log("joined waitlist")
 
 		},
 
 		error: function(response) {
 
-			console.log("Error at waitlist_handler ajax call");
+			//console.log("Error at waitlist_handler ajax call");
 
 		}
 
@@ -178,7 +178,7 @@ function signup_handler(e) {
 
 		error: function(response) {
 
-			console.log("Error at signup_handler ajax call");
+			//console.log("Error at signup_handler ajax call");
 
 		}
 

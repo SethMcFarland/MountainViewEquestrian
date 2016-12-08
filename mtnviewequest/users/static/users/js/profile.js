@@ -28,7 +28,7 @@ function unenroll_event_handler() {
 
 		error: function(response) {
 
-			console.log("Error at unenroll_event_handler ajax call");
+			//console.log("Error at unenroll_event_handler ajax call");
 
 		}
 
@@ -54,7 +54,7 @@ function drop_waitlist_handler(e) {
 
 		error: function(response) {
 
-			console.log("Error at unenroll_event_handler ajax call");
+			//console.log("Error at unenroll_event_handler ajax call");
 
 		}
 
@@ -87,7 +87,7 @@ function event_details_handler(e) {
 
 		error: function(response) {
 
-			console.log("Error at event_details_handler ajax call");
+			//console.log("Error at event_details_handler ajax call");
 
 		}
 
@@ -113,7 +113,7 @@ function re_enroll_horse_handler() {
 
 		error: function() {
 
-			console.log("Error at re_enroll_horse_handler ajax call");
+			//console.log("Error at re_enroll_horse_handler ajax call");
 
 		}
 
@@ -137,13 +137,13 @@ function horse_details_handler(e) {
 			$('#horse_details_modal').html(response).foundation('open');
 			$('#horse_details_accordion').foundation();
 			$('#re_enroll_horse_button').click(re_enroll_horse_handler);
-			console.log("success");
+			//console.log("success");
 
 		},
 
 		error: function(response) {
 
-			console.log("Error code from horse_details_handler ajax call");
+			//console.log("Error code from horse_details_handler ajax call");
 
 		}
 
@@ -180,13 +180,13 @@ function horse_registration(e) {
 				$('.horse_details_table_item').click(horse_details_handler);
 				$('#horse_registration_form')[0].reset();
 				$('#register_horse_modal').foundation('close');
-				console.log("success");
+				//console.log("success");
 
 			}
 
 			else if(xhr.status == 201) {
 
-				console.log("no such luck");
+				//console.log("no such luck");
 				$('#register_horse_modal').html(response);
 
 			}
@@ -195,7 +195,7 @@ function horse_registration(e) {
 
 		error: function(response) {
 
-			console.log("Error code from horse_registration ajax call");
+			//console.log("Error code from horse_registration ajax call");
 
 		}
 

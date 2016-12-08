@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	
 	$(document).on("change", '#id_reason', function() {
-		console.log($('#id_reason').val());
+		//console.log($('#id_reason').val());
 		extend_form($('#id_reason').val());
 	});
 
@@ -78,7 +78,7 @@ function register_form_submit(e) {
 
 			else if(xhr.status == 201) {
 
-				console.log("no such luck");
+				//console.log("no such luck");
 				$('#login_or_reg_modal_contents').html(response);
 				extend_form($('#id_reason').val());
 
@@ -88,7 +88,7 @@ function register_form_submit(e) {
 
 		error: function(response){
 
-			console.log("Error code from register_form_submit ajax call");
+			//console.log("Error code from register_form_submit ajax call");
 
 		}
 
@@ -115,7 +115,7 @@ function register_handler() {
 
 		error: function(response) {
 
-			console.log("Error code from register_handler ajax call");
+			//console.log("Error code from register_handler ajax call");
 		}
 
 	});
@@ -125,7 +125,7 @@ function register_handler() {
 function login_form_submit(e) {
 
 	e.preventDefault();
-	console.log("posting login uname: " + $('#id_email').val() + "   pword: " + $('#id_password').val());
+	//console.log("posting login uname: " + $('#id_email').val() + "   pword: " + $('#id_password').val());
 
 	$.ajax({
 
@@ -149,7 +149,7 @@ function login_form_submit(e) {
 
 			else if(xhr.status == 201) {
 
-				console.log("no such luck");
+				//console.log("no such luck");
 				$('#login_or_reg_modal_contents').html(response);
 
 			}
@@ -158,7 +158,7 @@ function login_form_submit(e) {
 
 		error: function(response){
 
-			console.log("Error code from login_form_submit ajax call");
+			//console.log("Error code from login_form_submit ajax call");
 
 		}
 
@@ -185,7 +185,7 @@ function login_handler() {
 
 		error: function(response) {
 
-			console.log("Error code from login_handler ajax call");
+			//console.log("Error code from login_handler ajax call");
 		}
 
 	});

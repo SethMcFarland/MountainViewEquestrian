@@ -7,10 +7,10 @@ var UserList = React.createClass({
 			cache: false,
 			success: function(data) {
 				this.setState({data: JSON.parse(data)});
-				console.log("success");
+				//console.log("success");
 			}.bind(this),
 			error: function(xhr, status, err) {
-				console.log("failure");
+				//console.log("failure");
 				console.error(this.props.url, status, err.toString());
 			}.bind(this)
 		});
