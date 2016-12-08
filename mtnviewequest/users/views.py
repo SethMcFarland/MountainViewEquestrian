@@ -87,9 +87,6 @@ def user_registration(request):
 				horse.owner = user
 				horse.save()
 
-			else:
-				#print("no horse found in post")
-
 			user = authenticate(username=user.username, password=password)
 			login(request, user)
 
