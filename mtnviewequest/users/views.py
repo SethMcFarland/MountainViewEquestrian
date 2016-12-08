@@ -17,14 +17,14 @@ def user_login(request):
 
 	if request.method == 'POST':
 		form = UserLoginForm(request.POST)
-		print("post true")
+		#print("post true")
 
 		if form.is_valid():
 			user = User.objects.filter(email=form.cleaned_data.get("email"))
-			print("valid form")
+			#print("valid form")
 
 			if user.exists() and len(user) == 1:
-				print("user exists")
+				#print("user exists")
 				user = authenticate(username=user[0].username, password=form.cleaned_data['password'])
 				login(request, user)
 				response = {'uid': user.id}
@@ -88,7 +88,7 @@ def user_registration(request):
 				horse.save()
 
 			else:
-				print("no horse found in post")
+				#print("no horse found in post")
 
 			user = authenticate(username=user.username, password=password)
 			login(request, user)
@@ -111,7 +111,7 @@ def horse_registration(request):
 		form = HorseRegistrationForm(request.POST)
 		if form.is_valid():
 			horse = form.save(commit=False)
-			print("This -->" + str(request.GET.get('uid')))
+			#print("This -->" + str(request.GET.get('uid')))
 			horse.owner = get_object_or_404(User, pk=request.GET.get('uid'))
 			horse.status = 3
 			horse.save()
