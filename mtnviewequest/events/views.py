@@ -64,10 +64,10 @@ def event_signup(request):
 	else:
 		#paypal_response = json.loads(request.body.decode('utf-8'))
 		#name_id = paypal_response["form"]["item_name"]
-		name_id = request.POST.get('item_name')
-		print("my event id = " + name_id.split('-', 1)[1])
+		eid = request.POST.get('item_number')
+		print("my event id = " + eid)
 
-		event = get_object_or_404(Event, pk=name_id.split('-', 1)[1])
+		event = get_object_or_404(Event, pk=eid)
 		user = get_object_or_404(User, pk=1)
 		event.users.add(user)
 

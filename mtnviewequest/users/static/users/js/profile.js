@@ -36,6 +36,32 @@ function unenroll_event_handler() {
 
 }
 
+function drop_waitlist_handler(e) {
+
+	var drop_waitlist_url = '/event/waitlist/?eid=' + window.current_eid + '&uid=' + uid + '&type=' + e.data.type;
+
+	$.ajax({
+
+		type: 'GET',
+		url: drop_waitlist_url,
+
+		success: function(response) {
+
+			$('#' + window.current_event_row).remove();
+			$('#event_details_modal').foundation('close');
+
+		},
+
+		error: function(response) {
+
+			console.log("Error at unenroll_event_handler ajax call");
+
+		}
+
+	});
+
+}
+
 function event_details_handler(e) {
 
 	window.current_event_row = $(this).attr('id');
@@ -50,7 +76,12 @@ function event_details_handler(e) {
 		success: function(response) {
 
 			$('#event_details_modal').html(response).foundation('open');
-			$('#event_details_button').click(unenroll_event_handler);
+
+			if(e.data.enrolled == 1)
+				$('#event_details_button').click(unenroll_event_handler);
+
+			else if(e.data.enrolled == 2)
+				$('#event_details_button').click({type: 2}, drop_waitlist_handler);
 
 		},
 

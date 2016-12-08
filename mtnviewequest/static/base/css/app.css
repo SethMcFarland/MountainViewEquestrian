@@ -16,6 +16,22 @@ a:focus {
 
 }
 
+h1, h2, h3, h4, h5, h6 {
+
+	font-family: "Cinzel", serif;
+	font-size: 2.2em;
+	font-weight: 400;
+
+}
+
+p {
+
+	font-family: "Quattrocento Sans", sans-serif;
+	font-size: 1em;
+	font-weight: 400;
+	
+}
+
 .main {
 	background-color: white;
 	box-shadow: 0.75em 0.75em #0f0b0b;

@@ -4,7 +4,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="small-12 large-12 columns">
+	<div class="small-12 large-12 columns article_text">
 		<!--<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 			<input type="hidden" name="cmd" value="_s-xclick">
 			<input type="hidden" name="hosted_button_id" value="UC2QDGTLGPCH6">
@@ -30,7 +30,7 @@
 		{% if event.cost == 0 %}
 			<h3>Thank you for enrolling!</h3>
 		{% else %}
-			<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+			<!--<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
 				<input type="hidden" name="cmd" value="_s-xclick">
 				<input type="hidden" name="hosted_button_id" value="8H4PRLP7RVGMC">
 				<table>
@@ -46,12 +46,49 @@
 					<option value="5">5 </option>
 				</select> </td></tr>
 				</table>
-				<input type="hidden" name="item_number" value="thisismyid5">
+				<input type="hidden" name="amount" value="99.99">
 				<input type="hidden" name="item_name" value="{{event.name}}-{{event.id}}">
 				<input type="hidden" name="rm" value="2">
 				<input type="hidden" name="currency_code" value="USD">
 				<input type="image" class="center_block" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 				<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+			</form>-->
+			<form target="paypal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+				<label for="amount">Would you like to pay the full fee now or just the deposit?</label> 
+				<select id="amount" name="amount">
+					<option value="{{event.cost}}">Full Fee (${{event.cost}})</option>
+					<option value="{{event.deposit}}">Deposit (${{event.deposit}})</option>
+				</select>
+				<label for="quantity">How many horses do you plan on bringing?</label>
+				<select id="quantity" name="quantity">
+					<option value="1">1 </option>
+					<option value="2">2 </option>
+					<option value="3">3 </option>
+					<option value="4">4 </option>
+					<option value="5">5 </option>
+				</select>
+
+				<input class="center_block" type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+				<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+				<input type="hidden" name="cmd" value="_xclick">
+				<!-- Replace "business" value with your PayPal Email Address or Account ID -->
+				<input type="hidden" name="business" value="mountainviewequest-facilitator@outlook.com">
+				<input type="hidden" name="item_name" value="{{event.name}}">
+				<input type="hidden" name="item_number" value="{{event.id}}">
+				<input type="hidden" name="no_shipping" value="2">
+				<input type="hidden" name="shipping" value="0.00">
+				<input type="hidden" name="tax" value="0.00">
+				<!-- Replace value with the web page you want the customer to return to after a successful transaction -->
+				<input type="hidden" name="return" value="http://httpbin.org/post">
+				<!-- Replace value with the web page you want the customer to return to after item cancellation -->
+				<input type="hidden" name="cancel_return" value="http://httpbin.org/post">
+				<input type="hidden" name="no_note" value="0">
+				<input type="hidden" name="cn" value="Add special instructions to the seller:">
+				<input type="hidden" name="country" value="US">
+				<input type="hidden" name="currency_code" value="USD">
+				<input type="hidden" name="lc" value="US">
+				<input type="hidden" name="rm" value="2">
+				<input type="hidden" name="bn" value="PP-BuyNowBF:btn_paynowCC_LG.gif:NonHosted">
 			</form>
 		{% endif %}
 	</div>
