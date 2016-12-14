@@ -62,10 +62,7 @@ def event_signup(request):
 		return HttpResponse(html)
 
 	else:
-		#paypal_response = json.loads(request.body.decode('utf-8'))
-		#name_id = paypal_response["form"]["item_name"]
 		eid = request.POST.get('item_number')
-		#print("my event id = " + eid)
 
 		event = get_object_or_404(Event, pk=eid)
 		user = get_object_or_404(User, pk=1)
@@ -98,13 +95,9 @@ def event_waitlist(request):
 	user = get_object_or_404(User, pk=request.user.id)	
 
 	if request.GET.get('type') == '1':
-		#print("adding user to waitlist")
 		event.waitlist.add(user)
 	else:
-		#print("removing user from waitlist")
 		event.waitlist.remove(user)
-
-	#print("I'm here")
 
 	return HttpResponse(status=200)
 
@@ -127,7 +120,6 @@ def get_all(request):
 	events_list = []
 
 	for event in events_in_period:
-		#item = {'id': event.id, 'title': event.name, 'start': event.start_date.isoformat(), 'end': event.end_date.isoformat(), 'allDay': False, 'url': '/event/details/?enrolled=0&eid=' + str(event.id)}
 		item = {'id': event.id, 'title': event.name, 'start': event.start_date.isoformat(), 'end': event.end_date.isoformat(), 'allDay': False, 'url': '/event/details/?eid=' + str(event.id)}
 
 		if event.status == 1:

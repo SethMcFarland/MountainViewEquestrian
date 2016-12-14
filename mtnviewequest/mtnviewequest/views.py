@@ -5,6 +5,7 @@ import os
 import django_rq
 
 from .forms import ContactForm
+from .helpers import send_email
 
 def index(request):
 	return render(request, 'base/index.html')
@@ -23,7 +24,7 @@ def contact(request):
 			queue = django_rq.get_queue('default')
 			
 			email = EmailMessage(
-				subject='New Message From ' + request.user.first_name + ' ' + request.user.last_name,
+				subject='New Message From ' + form.cleaned_data.get('name'),
 				body=form.cleaned_data.get('message'),
 				from_email='mountainviewequest@outlook.com',
 				to=['sethmcfarland@outlook.com',],
@@ -48,10 +49,3 @@ def gallery(request):
 	orbit_pic_set = [gallery_path + picpath for picpath in orbit_pic_set]
 
 	return render(request, 'base/gallery.html', {'orbit_pic_set': orbit_pic_set})
-
-
-
-################# HELPERS #################
-
-def send_email(email):
-	email.send(fail_silently=False)

@@ -4,10 +4,13 @@ from django.core import serializers
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.urls import reverse
 from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
 import json
+import django_rq
 
 from .forms import UserRegistrationForm, UserLoginForm, HorseRegistrationForm
 from .models import Profile, Horse
+from .helpers import send_email
 from events.models import Event
 from django.contrib.auth.models import User
 
@@ -17,14 +20,11 @@ def user_login(request):
 
 	if request.method == 'POST':
 		form = UserLoginForm(request.POST)
-		#print("post true")
 
 		if form.is_valid():
 			user = User.objects.filter(email=form.cleaned_data.get("email"))
-			#print("valid form")
 
 			if user.exists() and len(user) == 1:
-				#print("user exists")
 				user = authenticate(username=user[0].username, password=form.cleaned_data['password'])
 				login(request, user)
 				response = {'uid': user.id}
@@ -90,6 +90,18 @@ def user_registration(request):
 			user = authenticate(username=user.username, password=password)
 			login(request, user)
 
+			queue = django_rq.get_queue('default')
+			
+			email = EmailMessage(
+				subject='Thank You!',
+				body='Thank you for registering on Mountain View Equestrian. If you did not register and this was sent in error then please reply to this email.',
+				from_email='mountainviewequest@outlook.com',
+				to=[user.email,],
+				reply_to=['mountainviewequest@outlook.com',],
+			)
+			
+			queue.enqueue(send_email, email)
+
 			response = {'uid': user.id}
 			return HttpResponse(json.dumps(response), content_type='application/json', status=202)
 
@@ -102,13 +114,11 @@ def user_registration(request):
 		html = render_to_string('users/partials/user_registration_form.html', {'form': form}, request=request)
 		return HttpResponse(html)
 
-
 def horse_registration(request):
 	if request.method == 'POST':
 		form = HorseRegistrationForm(request.POST)
 		if form.is_valid():
 			horse = form.save(commit=False)
-			#print("This -->" + str(request.GET.get('uid')))
 			horse.owner = get_object_or_404(User, pk=request.GET.get('uid'))
 			horse.status = 3
 			horse.save()
