@@ -199,7 +199,6 @@ class UserRegistrationForm(forms.ModelForm):
 		return username
 
 	def clean_password2(self):
-		print(self.cleaned_data)
 		password = self.cleaned_data.get('password')
 		password2 = self.cleaned_data.get('password2')
 		
