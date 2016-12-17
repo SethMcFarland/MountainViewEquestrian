@@ -66,7 +66,7 @@ def event_signup(request):
 		eid = request.POST.get('item_number')
 
 		event = get_object_or_404(Event, pk=eid)
-		user = get_object_or_404(User, pk=1)
+		user = get_object_or_404(User, pk=request.user.id)
 		event.users.add(user)
 
 		invoice = Invoice(
