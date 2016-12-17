@@ -72,7 +72,7 @@ def event_signup(request):
 		invoice = Invoice(
 			user = user,
 			event = event,
-			amount_paid = int(request.POST.get('payment_gross')),
+			amount_paid = request.POST.get('payment_gross'),
 			amount_charged = event.cost * int(request.POST.get('quantity')),
 			date_billed = datetime.now(),
 			date_due = datetime.now() + timedelta(days=30),
