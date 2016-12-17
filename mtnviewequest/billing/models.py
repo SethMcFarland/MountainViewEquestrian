@@ -26,6 +26,10 @@ class Invoice(models.Model):
 
 	horses = models.ManyToManyField(Horse, related_name="invoices")
 
+	amount_paid = models.IntegerField()
+
+	amount_charged = models.IntegerField()
+
 	date_billed = models.DateTimeField()
 
 	date_due = models.DateTimeField()
