@@ -22,7 +22,7 @@ class Invoice(models.Model):
 		(EVENT, 'Event'),
 	)
 
-	user = models.OneToOneField(User, on_delete=models.PROTECT, related_name="invoices")
+	user = models.ForeignKey(User, on_delete=models.PROTECT, related_name="invoices")
 
 	horses = models.ManyToManyField(Horse, related_name="invoices")
 
