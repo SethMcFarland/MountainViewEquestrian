@@ -4,11 +4,12 @@ from django.http import HttpResponse, JsonResponse
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import EmailMessage
-import django_rq
-import dateutil.parser, datetime, json
+from datetime import datetime, timedelta
+import django_rq, dateutil.parser, json
 
 from .helpers import send_email
 from .models import Event, Address
+from billing.models import Invoice
 from users.forms import HorseRegistrationForm
 from django.contrib.auth.models import User
 
@@ -67,6 +68,17 @@ def event_signup(request):
 		event = get_object_or_404(Event, pk=eid)
 		user = get_object_or_404(User, pk=1)
 		event.users.add(user)
+
+		invoice = Invoice(
+			user = user,
+			event = event,
+			date_billed = datetime.now(),
+			date_due = datetime.now() + timedelta(days=30),
+			status = PAID,
+			service = EVENT
+		)
+
+		invoice.save()
 
 		queue = django_rq.get_queue('default')
 			

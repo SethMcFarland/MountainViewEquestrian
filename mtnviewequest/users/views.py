@@ -5,8 +5,7 @@ from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.urls import reverse
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
-import json
-import django_rq
+import json, django_rq
 
 from .forms import UserRegistrationForm, UserLoginForm, HorseRegistrationForm
 from .models import Profile, Horse
@@ -52,7 +51,7 @@ def user_profile(request, uid):
 	users_events = user.enrolled_events.all()
 	users_waitlist = user.waitlisted_events.all()
 	horse_form = HorseRegistrationForm()
-
+	
 	return render(request, 'users/profile.html', {'user': user, 'horse_form': horse_form, 'users_horses': users_horses, 'users_events': users_events, 'users_waitlist': users_waitlist})
 
 
