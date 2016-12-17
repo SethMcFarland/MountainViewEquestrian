@@ -38,5 +38,5 @@ class Invoice(models.Model):
 
 	service = models.IntegerField(choices=service_choices, default=TRAINING)
 
-	event = models.OneToOneField(Event, on_delete=models.PROTECT, blank=True)
+	event = models.ForeignKey(Event, on_delete=models.PROTECT, blank=True)
 
