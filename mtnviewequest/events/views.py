@@ -82,6 +82,8 @@ def event_signup(request):
 
 		invoice.save()
 
+		user.invoices.add(invoice)
+
 		queue = django_rq.get_queue('default')
 			
 		email = EmailMessage(
