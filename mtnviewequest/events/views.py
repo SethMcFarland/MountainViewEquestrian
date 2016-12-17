@@ -73,7 +73,7 @@ def event_signup(request):
 			user = user,
 			event = event,
 			amount_paid = request.POST.get('payment_gross'),
-			amount_charged = event.cost() * int(request.POST.get('quantity')),
+			amount_charged = event.cost() * request.POST.get('quantity'),
 			date_billed = datetime.now(),
 			date_due = datetime.now() + timedelta(days=30),
 			status = 3,
